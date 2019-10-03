@@ -1,0 +1,8 @@
+[26-Apr-2019 12:19:16 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/correctegypttour/public_html/demo/CorrectEgypt/routes/admin/web.php:29
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/routes/admin/web.php on line 29
+[26-Apr-2019 18:21:48 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/correctegypttour/public_html/demo/CorrectEgypt/routes/admin/web.php:29
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/routes/admin/web.php on line 29

@@ -1,0 +1,1 @@
+<h4 class="alert alert-danger text-center">@lang('site.dataNotFound')</h4>

@@ -1,0 +1,102 @@
+.logo_main{
+    height: 100%;
+}
+
+.price_offers{
+
+}
+
+.price_offers span{
+
+}
+
+.price_offers .number{
+    margin: 0 5px 0 5px;
+    font-size: 18px;
+    color: #ff9854;
+    font-weight: bold;
+}
+
+.review_rating{
+    color: #ff9854;
+    display: block;
+    margin: 0 0 0 0;
+}
+
+.copy_right_new{
+    border-top: 1px solid #ddd;
+    margin: 15px 0 0 0;
+    padding: 15px 0 0 0;
+}
+
+
+.social_footer{
+
+}
+
+.social_footer a{
+    width: 20px;
+    height: 20px;
+    background: #b30d07;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 5px 0;
+    line-height: 2.2;
+    border-radius: 25px;
+    font-size: 10px;
+}
+
+.social_footer a:hover{
+    background: #ff9854;
+    color: #fff;
+}
+
+
+.box_price {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-top: 0;
+    background: #fff;
+    margin: 0 0 15px 0;
+}
+
+.box_price span {
+    font-size: 12px;
+    color: #909090;
+}
+
+.box_price p {
+    font-size: 13px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding: 0 0 10px 0;
+    margin: 0 0 10px 0;
+}
+
+.con_tab_view {
+
+}
+
+.con_tab_view .panel-title a{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: inherit;
+}
+
+.bg-main{
+    background: #b30d07;
+}
+
+.section-title-related{
+    text-align: left;
+    margin: 30px 0 15px 0;
+    color: #fff;
+}
+.section-title-related h2{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    color: #fff;
+}

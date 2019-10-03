@@ -1,0 +1,32 @@
+[26-Apr-2019 12:16:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingFactory.php on line 5
+[26-Apr-2019 12:16:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingHotelFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingHotelFactory.php on line 5
+[26-Apr-2019 12:16:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingFactory.php on line 5
+[26-Apr-2019 12:17:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingHotelFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingHotelFactory.php on line 5
+[29-Apr-2019 15:40:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingFactory.php on line 5
+[29-Apr-2019 15:40:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingFactory.php on line 5
+[29-Apr-2019 15:40:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingHotelFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/DailyPricingHotelFactory.php on line 5
+[29-Apr-2019 15:40:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingHotelFactory.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/correctegypttour/public_html/demo/CorrectEgypt/database/factories/PackagePricingHotelFactory.php on line 5
