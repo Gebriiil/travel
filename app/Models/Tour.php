@@ -36,7 +36,7 @@ class Tour extends Model
 
     public function subCategory()
     {
-        return $this->hasOne('App\Models\SubCategory','id','sub_category_id');
+        return $this->belongsTo('App\Models\SubCategory','id','category_id');
     }
 
 

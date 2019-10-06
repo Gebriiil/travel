@@ -7,6 +7,7 @@ use App\Http\Requests\SubscribeRequest;
 use App\Models\Review;
 use App\Models\Slider;
 use App\Models\SubCategory;
+use App\Models\Category;
 use App\Models\Subscriber;
 use App\Models\Tour;
 
@@ -36,6 +37,10 @@ class HomeController extends ParentController
         $data['clients']=Review::where('language_id',  $lang->id)
             ->orderBy('id', 'desc','name','title','img','sort')
             ->take(6)
+            ->get();
+        $data['categories']=Category::where('language_id',  $lang->id)
+            ->orderBy('id','name','img','img_alt')
+            ->take(8)
             ->get();
 
 

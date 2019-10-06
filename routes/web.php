@@ -44,6 +44,7 @@ Route::group(
             Route::get('/{categorySlug}/{subCategorySlug}', 'SubCategoryController@index')->name('get.subCategory.index');
             Route::get('/{categorySlug}/{subCategorySlug}/filter', 'SubCategoryController@filter')->name('get.subCategory.filter');
             Route::get('/{categorySlug}/{subCategorySlug}/{tourSlug}', 'TourController@index')->name('get.tour.index');
+            Route::post('/search-tours', 'SubCategoryController@searchTours');
 
 
 

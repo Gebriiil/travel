@@ -29,13 +29,13 @@ class SubCategory extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Models\Category', 'id', 'category_id');
+        return $this->hasOne(Category::class);
     }
 
 
-    // public function tour()
-    // {
-    // 	    return $this->hasMany('App\Models\Tour','country_id','id');
-    // }
+    public function tours()
+    {
+    	    return $this->hasMany(Tour::class);
+    }
 
 }

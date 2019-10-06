@@ -20,7 +20,7 @@
                   confirmButtonText: '{{trans("site.ok")}}'
                 });
             }
-            else {
+            else { 
                 $.ajax({
                     type: "POST",
                     accept: 'application/json',

@@ -181,6 +181,11 @@ if (!function_exists('seo_content')) {
         return json_decode($seo_content->seo);
     }
 }
+if(!function_exists('murl')){
+    function murl($url=null){
+        return url( app()->getLocale()  .'/'. $url);
+    }
+}
 
 
 

@@ -46,29 +46,44 @@
 
 				<div class="container">
 
-					<form class="inner">
-
+					<form  action="{{murl('search-tours')}}" method="post">
+						@csrf
 						<div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-3">
+							<div class="col-xs-12 col-sm-12 col-md-6">
 
 								<div class="typeahead-container form-group form-icon-right">
 
 									<label class="destination-search-3">Destination</label>
 
 									<div class="typeahead-field">
-										<input id="destination-search-3" name="destination-search-3" type="search" autocomplete="off" class="form-control" placeholder="City or Airport">
+										<input id="destination-search-3"  type="search" autocomplete="off" class="form-control" placeholder="City or Airport" name="destination">
 									</div>
 									<i class="fa fa-map-marker"></i>
 								</div>
 
 							</div>
 
-							<div class="col-xss-12 col-xs-12 col-sm-4">
+							<div class="col-xss-12 col-xs-12 col-sm-6">
 
 								<div class="row gap-10">
 
 									<div class="col-xss-12 col-xs-6 col-sm-6">
+										<div class="form-group form-icon-right">
+											<label for="dpd1">Price-start</label>
+											<input  name="from" type="number" autocomplete="off" class="form-control" placeholder="Price-start">
+											<i class="fa fa-money"></i>
+										</div>
+									</div>
+
+									<div class="col-xss-12 col-xs-6 col-sm-6">
+										<div class="form-group form-icon-right">
+											<label for="dpd2">Price-end</label>
+											<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end">
+											<i class="fa fa-money"></i>
+										</div>
+									</div>
+									<!-- <div class="col-xss-12 col-xs-6 col-sm-6">
 										<div class="form-group form-icon-right">
 											<label for="dpd1">Check-in</label>
 											<input name="dpd1" class="form-control" id="dpd1" placeholder="Check-in" type="text" readonly >
@@ -82,49 +97,18 @@
 											<input name="dpd2" class="form-control" id="dpd2" placeholder="Check-out" type="text" readonly>
 											<i class="fa fa-calendar"></i>
 										</div>
-									</div>
+									</div> -->
 
 								</div>
 							</div>
 
-							<div class="col-xss-12 col-xs-12 col-sm-6 col-md-5">
-
-								<div class="row gap-10">
-									<div class="col-xss-12 col-xs-4 col-sm-4">
-
-										<div class="form-group form-spin-group">
-											<label for="room-amount">Rooms</label>
-											<input type="text" class="form-control form-spin" value="1" id="room-amount" name="room-amount"/>
-										</div>
-
-									</div>
-
-									<div class="col-xss-12 col-xs-4 col-sm-4">
-
-										<div class="form-group form-spin-group">
-											<label for="adult-amount">Adults</label>
-											<input type="text" class="form-control form-spin" value="1" id="adult-amount" name="adult-amount"/>
-										</div>
-
-									</div>
-
-									<div class="col-xss-12 col-xs-4 col-sm-4">
-
-										<div class="form-group form-spin-group">
-											<label for="child-amount">Children</label>
-											<input type="text" class="form-control form-spin" value="0" id="child-amount" name="child-amount"/>
-										</div>
-
-									</div>
-								</div>
-
-							</div>
+							
 
 						</div>
 
 						<div class="btn-absolute">
 
-							<button class="btn btn-block btn-danger">Search</button>
+							<button type="submit" class="btn btn-block btn-danger">Search</button>
 
 						</div>
 
@@ -142,8 +126,8 @@
 					<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 
 						<div class="section-title">
-							<h2>Top Destinations</h2>
-							<p>Egypt us tours offers Egypt and Jordan combined tours, check Egypt and jordan different itinerary and enjoy our Egypt Jordan tour packages, also check other multiculture tours</p>
+							<h2>{{ site_content($site_content,'top_destinations') }}</h2>
+							<p>{{ site_content($site_content,'top_destinations_desc') }}</p>
 						</div>
 
 					</div>
@@ -154,24 +138,31 @@
 					<div class="GridLex-gap-20-wrapper">
 
 						<div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
-
+							@foreach($categories as $category)
 							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
 
 								<div class="top-destination-item">
 									<a href="#">
 										<div class="image">
-											<img src="images/top-destinations/01.jpg" alt="Top Destinations">
+											<img src="
+											{{ getImage(TOUR_PATH.$category->img) }}" alt="{{ json_value($category,'img_alt') }}" title="{{ json_value($category,'img_title') }}">
 										</div>
 										<div class="content">
 											<div class="row gap-10">
 
 												<div class="col-xs-7 place">
-													<h4>Cairo</h4>
-													<p>Egypt</p>
+													<h4>{{$category->country?$category->country->name:''}}</h4>
 												</div>
-
+												<?php
+												   $subs=$category->sub?$category->sub->count():0;
+												   $sub2=0;
+												   foreach($category->sub as $sub){
+												   	$sub2+=$sub->tours?$sub->tours->count():0;
+												   }
+												   $tour_num=$subs*$sub2;
+												?>
 												<div class="col-xs-5 price">
-													<p>984 Tours</p>
+													<p>{{$tour_num}}</p>
 													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
 												</div>
 
@@ -181,188 +172,7 @@
 								</div>
 
 							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/02.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Paris</h4>
-													<p>France</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/03.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Giza</h4>
-													<p>Egypt</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/04.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Rome</h4>
-													<p>Italy</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/05.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Dubai</h4>
-													<p>Emirate</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/06.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Montreal</h4>
-													<p>Canada</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/07.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>London</h4>
-													<p>England</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
-							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-								<div class="top-destination-item">
-									<a href="#">
-										<div class="image">
-											<img src="images/top-destinations/08.jpg" alt="Top Destinations">
-										</div>
-										<div class="content">
-											<div class="row gap-10">
-
-												<div class="col-xs-7 place">
-													<h4>Marrakesh</h4>
-													<p>Morocco</p>
-												</div>
-
-												<div class="col-xs-5 price">
-													<p>984 Tours</p>
-													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-												</div>
-
-											</div>
-										</div>
-									</a>
-								</div>
-
-							</div>
+							@endforeach
 
 						</div>
 
@@ -408,16 +218,22 @@
 
 										<div class="content">
 
-											<h4> Alamein Tours from Alexandria Port  </h4>
+											<h4> {{ $special_offers[$x]->name }}  </h4>
 											<div class="review_rating">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star-o" aria-hidden="true"></i>
+												<?php 
+												for($z=1;$z<=5;$z++){
+													if ($special_offers[$x]->num_of_stars>=$z) {
+																		$m[$z]='';
+																}else{
+																		$m[$z]='-o';
+																		}
+																	
+													?>
+													<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+													<?php } ?>
 											</div>
 
-											<p class="price_offers"><span>start from</span><span class="number">$120</span> / night</p>
+											<p class="price_offers"><span>start from</span><span class="number">{{$special_offers[$x]->price_start_from}}$</span> / night</p>
 											<a href="#" class="btn-read-more">read more <i class="fa fa-long-arrow-right"></i></a>
 
 										</div>
@@ -466,7 +282,7 @@
 								@foreach ($latest_tours as $latest_item)
 								<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
 									<div class="hotel-item-grid">
-										<a href="{{ route('front.get.tour.index',[$latest_item->subCategory->category->slug,$latest_item->subCategory->slug,$latest_item->slug]) }}">
+										<a href="">
 											<div class="image" height="258" width="212">
 												<img src="{{ getImage(TOUR_PATH.$latest_item->img) }}" alt="{{ json_value($latest_item,'img_alt') }}" title="{{ json_value($latest_item,'img_title') }}" >
 											</div>
@@ -480,38 +296,17 @@
 														<div class="tripadvisor-module">
 															<div class="texting">
 																<div class="review_rating">
-															<?php 
-																if ($latest_item->num_of_stars>=1) {
-																		$x1='';
-																}else{
-																		$x1='-o';
-																		}
-																if ($latest_item->num_of_stars>=2) {
-																		$x2='';
-																}else{
-																		$x2='-o';
-																		}
-																if ($latest_item->num_of_stars>=3) {
-																		$x3='';
-																}else{
-																		$x3='-o';
-																		}
-																if ($latest_item->num_of_stars>=4) {
-																		$x4='';
-																}else{
-																		$x4='-o';
-																		}
-																if ($latest_item->num_of_stars>=5) {
-																		$x5='';
-																}else{
-																		$x5='-o';
-																		}
-																	 ?>
-																	<i class="fa fa-star{{$x1}}" aria-hidden="true"></i>
-																	<i class="fa fa-star{{$x2}}" aria-hidden="true"></i>
-																	<i class="fa fa-star{{$x3}}" aria-hidden="true"></i>
-																	<i class="fa fa-star{{$x4}}" aria-hidden="true"></i>
-																	<i class="fa fa-star{{$x5}}" aria-hidden="true"></i>
+																<?php 
+																for($z=1;$z<=5;$z++){
+																	if ($latest_item->num_of_stars>=$z) {
+																						$m[$z]='';
+																				}else{
+																						$m[$z]='-o';
+																						}
+																					
+																	?>
+																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																	<?php } ?>
 																</div>
 															</div>
 															<div class="hover-underline"> reviews</div>
@@ -678,7 +473,6 @@
 
 								<div class="col-xss-12 col-xs-4 col-sm-4 mt-10-xss" id="newsletter-submit">
 									<input  class="btn btn-block btn-danger" value="Submit"  >
-									@csrf
 								</div>
 
 							</form>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\SubCategory;
 use App\Models\Tour;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 
@@ -112,94 +114,107 @@ class SubCategoryController extends ParentController
     {
 
         // check if this category exist or not
-        if (isset($request->category) && isset($request->sub_category)) {
-            $category = Category::where('slug', $request->category)->first();
-            $check = SubCategory::where('slug', $request->sub_category)->first();
+        // if (isset($request->category) && isset($request->sub_category)) {
+        //     $category = Category::where('slug', $request->category)->first();
+        //     $check = SubCategory::where('slug', $request->sub_category)->first();
 
-            if (is_object($category)) {
-                $childs = SubCategory::where('category_id', $category->id)->get();
+        //     if (is_object($category)) {
+        //         $childs = SubCategory::where('category_id', $category->id)->get();
 
-                $data['category'] = $category;
-                $data['sub_category'] = $check;
-                $data['childs'] = $childs;
+        //         $data['category'] = $category;
+        //         $data['sub_category'] = $check;
+        //         $data['childs'] = $childs;
 
 
-                if (is_object($check)) {
-                    $query = Tour::
-                    where('sub_category_id', $check->id);
+        //         if (is_object($check)) {
+        //             $query = Tour::
+        //             where('sub_category_id', $check->id);
 
-                    if (isset($request->from)) {
-                        if ($request->from > 0) {
-                            $query->where('price_start_from', '>=', $request->from);
+        //             if (isset($request->from)) {
+        //                 if ($request->from > 0) {
+        //                     $query->where('price_start_from', '>=', $request->from);
+        //                 }
+        //             }
+
+
+        //             if (isset($request->to)) {
+        //                 if ($request->to > 0) {
+        //                     $query->where('price_start_from', '<=', $request->to);
+        //                 }
+        //             }
+
+        //             $data['tours'] = $query->paginate(15);
+
+        //             $url = url()->current() . '?category=' . $request->category . '?sub_category=' . $request->sub_category . '&from=' . $request->from . '&to=' . $request->to;
+
+        //             //paginate with custom url
+        //             $data['tours']->withPath($url);
+
+        //             return view('front2.tour.search_results')->with($data);
+        //         }
+
+
+        //     }
+
+
+        // } else if (isset($request->category) && !isset($request->sub_category)) {
+        //     $category = Category::where('slug', $request->category)->first();
+        //     if (is_object($category)) {
+        //         $childs = SubCategory::where('category_id', $category->id)->get();
+
+        //         $data['category'] = $category;
+        //         //$data['sub_category'] = $check;
+        //         $data['childs'] = $childs;
+
+        //         $childs_ids = [];
+        //         foreach ($childs as $child) {
+        //             array_push($childs_ids, $child->id);
+        //         }
+
+        //         $query = Tour::
+        //         whereIn('sub_category_id', $childs_ids);
+
+        //         if (isset($request->from)) {
+        //             if ($request->from > 0) {
+        //                 $query->where('price_start_from', '>=', $request->from);
+        //             }
+        //         }
+
+
+        //         if (isset($request->to)) {
+        //             if ($request->to > 0) {
+        //                 $query->where('price_start_from', '<=', $request->to);
+        //             }
+        //         }
+
+        //         $data['tours'] = $query->paginate(15);
+
+        //         $url = url()->current() . '?category=' . $request->category . '&from=' . $request->from . '&to=' . $request->to;
+
+        //         //paginate with custom url
+        //         $data['tours']->withPath($url);
+
+        //         return view('front2.tour.search_results')->with($data);
+        //     }
+        // } else {
+        //     return redirect(url('/'));
+        // }
+
+
+        // return redirect(url('/'));
+        $city=City::where('name',$request->destination)->first();
+        if (isset($city)) {
+            
+                    
+                   foreach($city->country->category as $cat){
+                        foreach($cat->sub as $sub){
+                            $tours=$sub->tours->where('price_start_from', '>=', $request->from);
                         }
-                    }
-
-
-                    if (isset($request->to)) {
-                        if ($request->to > 0) {
-                            $query->where('price_start_from', '<=', $request->to);
-                        }
-                    }
-
-                    $data['tours'] = $query->paginate(15);
-
-                    $url = url()->current() . '?category=' . $request->category . '?sub_category=' . $request->sub_category . '&from=' . $request->from . '&to=' . $request->to;
-
-                    //paginate with custom url
-                    $data['tours']->withPath($url);
-
-                    return view('front.tour.search_results')->with($data);
-                }
-
-
-            }
-
-
-        } else if (isset($request->category) && !isset($request->sub_category)) {
-            $category = Category::where('slug', $request->category)->first();
-            if (is_object($category)) {
-                $childs = SubCategory::where('category_id', $category->id)->get();
-
-                $data['category'] = $category;
-                //$data['sub_category'] = $check;
-                $data['childs'] = $childs;
-
-                $childs_ids = [];
-                foreach ($childs as $child) {
-                    array_push($childs_ids, $child->id);
-                }
-
-                $query = Tour::
-                whereIn('sub_category_id', $childs_ids);
-
-                if (isset($request->from)) {
-                    if ($request->from > 0) {
-                        $query->where('price_start_from', '>=', $request->from);
-                    }
-                }
-
-
-                if (isset($request->to)) {
-                    if ($request->to > 0) {
-                        $query->where('price_start_from', '<=', $request->to);
-                    }
-                }
-
-                $data['tours'] = $query->paginate(15);
-
-                $url = url()->current() . '?category=' . $request->category . '&from=' . $request->from . '&to=' . $request->to;
-
-                //paginate with custom url
-                $data['tours']->withPath($url);
-
-                return view('front.tour.search_results')->with($data);
-            }
-        } else {
-            return redirect(url('/'));
+                    } 
+                
+            
         }
-
-
-        return redirect(url('/'));
+        return view('front2.pages.tour.search_results',compact('tours'));
     }
 }
 
