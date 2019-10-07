@@ -20,6 +20,8 @@
             $('#grid_container').hide();
             $('#list_container').css('display', 'block');
             $('#grid_container').css('display', 'none');
+            $('#list_btn').addClass('active');
+            $('#grid_btn').removeClass('active');
         }
 
 
@@ -28,6 +30,8 @@
             $('#grid_container').show();
             $('#list_container').css('display', 'none');
             $('#grid_container').css('display', 'block');
+            $('#grid_btn').addClass('active');
+            $('#list_btn').removeClass('active');
         }
 
 

@@ -46,7 +46,7 @@
 
 				<div class="container">
 
-					<form  action="{{murl('search-tours')}}" method="post">
+					<form  action="{{murl('search-tour')}}" method="post">
 						@csrf
 						<div class="row">
 
