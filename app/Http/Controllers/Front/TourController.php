@@ -157,7 +157,7 @@ class TourController extends ParentController
                 ->get();
 
 
-            return view('front.tour.view_tour')->with($data);
+            return view('front2.pages.tour.view')->with($data);
         }
         return redirect(url('/'));
     }

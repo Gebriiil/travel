@@ -12,7 +12,7 @@
 
 							<div class="col-xs-12 col-sm-8">
 								<ol class="breadcrumb">
-									<li><a href="#">Home</a></li>
+									<li><a href="#">{{ site_content($site_content,'home') }}</a></li>
 									<li><a href="#">Destinations</a></li>
 									<li class="active">Destination</li>
 								</ol>
@@ -192,20 +192,26 @@
 
 									<div class="row gap-5">
 										<div class="col-xs-12 col-sm-8 col-md-9">
-											<h2>Egypt Travel Packages | Egypt tours and Holidays Packages</h2>
+											<h2>{{ $tour->name }}</h2>
 											<p class="mb-0">Egypt , Pyramids</p>
 										</div>
 										<div class="col-xs-12 col-sm-4 col-md-3">
 											<div class="tripadvisor-module text-right">
 												<div class="raty-wrapper">
-													<div class="texting text-uppercase">4.3 Excellent</div>
+													<div class="texting text-uppercase">{{$tour->num_of_stars}} Excellent</div>
 												</div>
 												<div class="review_rating">
-													<i class="fa fa-star" aria-hidden="true"></i>
-													<i class="fa fa-star" aria-hidden="true"></i>
-													<i class="fa fa-star" aria-hidden="true"></i>
-													<i class="fa fa-star" aria-hidden="true"></i>
-													<i class="fa fa-star-o" aria-hidden="true"></i>
+													<?php 
+														for($z=1;$z<=5;$z++){
+															if ($tour->num_of_stars>=$z) {
+																				$m[$z]='';
+																		}else{
+																				$m[$z]='-o';
+																				}
+																					
+																	?> 
+																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																	<?php } ?>
 												</div>
 											</div>
 										</div>
@@ -219,36 +225,17 @@
 										<div class="slick-gallery-slideshow">
 
 											<div class="slider gallery-slideshow">
-												<div><div class="image"><img src="images/detail-gallery/01.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/02.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/03.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/04.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/05.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/06.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/07.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/08.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/09.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/10.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/11.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/12.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/13.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/14.jpg" alt="Images" /></div></div>
+												@foreach ($gallary as $image)
+												<div><div class="image"><img src="{{ getImage(TOUR_PATH.$image->img) }}" alt="Images" /></div></div>
+												
+												@endforeach
+
 											</div>
 											<div class="slider gallery-nav">
-												<div><div class="image"><img src="images/detail-gallery/thumb/01.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/02.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/03.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/04.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/05.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/06.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/07.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/08.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/09.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/10.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/11.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/12.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/13.jpg" alt="Images" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/thumb/14.jpg" alt="Images" /></div></div>
+												@foreach ($gallary as $image)
+												<div><div class="image"><img src="{{ getImage(TOUR_PATH.$image->img) }}" alt="Images" /></div></div>
+												
+												@endforeach
 											</div>
 
 										</div>
@@ -268,16 +255,13 @@
 															<a href="#detail-content-sticky-nav-01">Gallery</a>
 														</li>
 														<li>
-															<a href="#detail-content-sticky-nav-02">Overview</a>
+															<a href="#detail-content-sticky-nav-02">{{ site_content($site_content,'overview') }}</a>
 														</li>
 														<li>
-															<a href="#detail-content-sticky-nav-03"> Itinerary</a>
+															<a href="#detail-content-sticky-nav-03"> {{ site_content($site_content,'itinerary') }}</a>
 														</li>
 														<li>
-															<a href="#detail-content-sticky-nav-04">Reviews</a>
-														</li>
-														<li>
-															<a href="#detail-content-sticky-nav-05">Accommodation</a>
+															<a href="#detail-content-sticky-nav-05">{{ site_content($site_content,'accommodation') }}</a>
 														</li>
 													</ul>
 
@@ -295,36 +279,18 @@
 											<h3>Description</h3>
 										</div>
 
-										<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+										<p>{!! $tour->desc !!}</p>
 
 
 										<div class="mb-30"></div>
 
-										<h5 class="font400 text-uppercase mb-15 font16">INCLUDED</h5>
+										<h5 class="font400 text-uppercase mb-15 font16">{{ site_content($site_content,'included') }}</h5>
 										<ul class="hotel-featured-list">
-											<li>Accommodation in Cairo</li>
-											<li>Accommodation in Luxor</li>
-											<li>Accommodation in Aswan</li>
-											<li>Sleeper train</li>
-											<li>Abu Simbel</li>
-											<li>Alexandria</li>
-											<li>All visits mentioned in the program</li>
-											<li>Tour guide Egyptologist</li>
-											<li>Transportation</li>
-											<li>Transfers from &amp; to your Hotel or Nile Cruise</li>
-											<li>All transfers by air-conditioned vehicle</li>
-											<li>English speaking tour guide “egyptologist”</li>
-											<li>All taxes &amp; service charge</li>
+											{!! $tour->inclusion !!}
 										</ul>
 
-										<h5 class="font400 text-uppercase mb-15 font16">EXCLUDED</h5>
-										<ul class="hotel-featured-list">
-											<li>Personal Expenses</li>
-											<li>Tipping </li>
-											<li>Any extras not mentioned in the program</li>
-
-										</ul>
-
+										<h5 class="font400 text-uppercase mb-15 font16">{{ site_content($site_content,'excluded') }}</h5>
+										{!! $tour->exclusion !!}
 										<div class="mb-30"></div>
 
 
@@ -365,75 +331,29 @@
 									<div id="detail-content-sticky-nav-03" class="pt-30">
 
 										<div class="section-title-3">
-											<h3>Itinerary</h3>
+											<h3>{{ site_content($site_content,'itinerary') }}</h3>
 										</div>
 
 										<div class="clear"></div>
 
 										<div class="con_tab_view">
 											<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+												@foreach ($itineraries as $itinerary)
 												<div class="panel panel-default">
 													<div class="panel-heading" role="tab" id="headingOne">
 														<h4 class="panel-title">
 															<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-																Day 1: Arrive in Egypt
+																{{ $itinerary->title }}
 															</a>
 														</h4>
 													</div>
 													<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 														<div class="panel-body">
-															Welcome to Ancient Egypt. Regardless of what time you arrive for your 8 day Egyptian adventure, a tour manager will be standing by to meet you at at the Airport. Once immigration formalities have been completed, you will be taken to check-in at the Hotel, a luxury hotel.
-															Your tour manager will then assist you with check-in, and then the two of you will discuss your tour itinerary and confirm the pick-up times for your various tours.
-															Enjoy a free “Welcome” drink on us, and spend the rest of your day any way you want. Go out and explore the city; sample local cuisine, or simply relax and unwind in the comfort of your hotel.
+															{!! $itinerary->desc !!}
 														</div>
 													</div>
 												</div>
-												<div class="panel panel-default">
-													<div class="panel-heading" role="tab" id="headingTwo">
-														<h4 class="panel-title">
-															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-																2: Giza Pyramids/Egyptian Museum
-															</a>
-														</h4>
-													</div>
-													<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-														<div class="panel-body">
-															You’ll enjoy a leisurely breakfast at your hotel, and then head out to the Great Giza Pyramids of Cheops, Chefren and Mykerinus.
-															Afterward, you will visit the Great Sphinx, and then the Valley Temple. The Egyptian Museum is also on the itinerary, where you will enjoy viewing ancient artifacts from Tutankhamen, as well as other great pharaohs. That evening, you’ll board an overnight sleeper train bound for Luxor.
-
-														</div>
-													</div>
-												</div>
-												<div class="panel panel-default">
-													<div class="panel-heading" role="tab" id="headingThree">
-														<h4 class="panel-title">
-															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-																Day 3: Luxor Sightseeing
-															</a>
-														</h4>
-													</div>
-													<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-														<div class="panel-body">
-															You will arrive in Luxor, and be met by our representative. Immediately following, you will transfer to the luxury Hotel for check-in. Next up, you will head out to the Valley of the Kings, where you will also enjoy the Temple of Hatshepsut and the famed Colossi of Memnon. The Luxor Temple and the Karnak Temples are also on the itinerary. After your tour, you will spend the night in your hotel in Luxor.
-															Meals included: Breakfast
-														</div>
-													</div>
-												</div>
-												<div class="panel panel-default">
-													<div class="panel-heading" role="tab" id="headingfour">
-														<h4 class="panel-title">
-															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-																4: Aswan Sightseeing
-															</a>
-														</h4>
-													</div>
-													<div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
-														<div class="panel-body">
-															After you enjoy breakfast at the hotel, you will board an air-conditioned vehicle and drive to Aswan. Here, you will check-in at Hotel Aswan before setting off to see the Aswan High Dam, the Unfinished Obelisk and the Temple of Philae, dedicated to Isis and Hathor. Finally, you will tour Elephantine Island aboard a Felucca boat and then return to your hotel for the night.
-															Meals included: Breakfast
-														</div>
-													</div>
-												</div>
+												@endforeach
 											</div>
 										</div>
 
@@ -442,159 +362,7 @@
 										<div class="bb mt-30"></div>
 
 									</div>
-									<div id="detail-content-sticky-nav-04" class="pt-30">
-
-										<div class="section-title-3">
-											<h3>Reviews</h3>
-										</div>
-
-										<div class="detail-review-wrapper">
-
-											<h5 class="mb-10 font400 mb-15 font15">35 Reviews
-												<span class="tripadvisor-module ml-10">
-												<span class="small mr-5">- </span>
-												<span class="tripadvisor-rate mr-5">
-													<i class="fa fa-certificate rated"></i>
-													<i class="fa fa-certificate rated"></i>
-													<i class="fa fa-certificate rated"></i>
-													<i class="fa fa-certificate rated"></i>
-													<i class="fa fa-certificate"></i>
-												</span>
-												<span class="small">4.3 Excellent</span>
-											</span>
-											</h5>
-
-
-
-											<div class="mb-30"></div>
-
-											<div class="review-item-wrapper">
-
-												<div class="review-item">
-
-													<div class="content-left">
-														<div class="image clearfix">
-															<img src="images/testimonial/01.jpg" alt="image" />
-														</div>
-														<h4 class="review-man upper">Austin Powers</h4>
-														<p class="date">on: 12.10.2015</p>
-													</div>
-
-													<div class="content">
-														<h5>Certainty listening no no behaviour</h5>
-														<p>It allowance prevailed enjoyment in it. Calling observe for who pressed raising his. Can connection instrument astonished unaffected his motionless preference. Announcing say boy precaution unaffected difficulty alteration him. Above be would at so going heard. Engaged at village at am equally proceed.</p>
-													</div>
-
-													<div class="content-right">
-
-														<div class="outer">
-															<div class="inner">
-																<div class="tripadvisor-module">
-																	<div class="tripadvisor-rate">
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate"></i>
-																	</div>
-																	<p><span>4.3</span>Excellent</p>
-																</div>
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-
-												<div class="review-item">
-
-													<div class="content-left">
-														<div class="image clearfix">
-															<img src="images/testimonial/02.jpg" alt="image" />
-														</div>
-														<h4 class="review-man upper">Austin Powers</h4>
-														<p class="date">on: 12.10.2015</p>
-													</div>
-
-													<div class="content">
-														<h5>Certainty listening no no behaviour</h5>
-														<p>It allowance prevailed enjoyment in it. Calling observe for who pressed raising his. Can connection instrument astonished unaffected his motionless preference. Announcing say boy precaution unaffected difficulty alteration him. Above be would at so going heard. Engaged at village at am equally proceed.</p>
-													</div>
-
-													<div class="content-right">
-
-														<div class="outer">
-															<div class="inner">
-																<div class="tripadvisor-module">
-																	<div class="tripadvisor-rate">
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate"></i>
-																	</div>
-																	<p><span>4.3</span>Excellent</p>
-																</div>
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-
-												<div class="review-item">
-
-													<div class="content-left">
-														<div class="image clearfix">
-															<img src="images/testimonial/03.jpg" alt="image" />
-														</div>
-														<h4 class="review-man upper">Austin Powers</h4>
-														<p class="date">on: 12.10.2015</p>
-													</div>
-
-													<div class="content">
-														<h5>Certainty listening no no behaviour</h5>
-														<p>It allowance prevailed enjoyment in it. Calling observe for who pressed raising his. Can connection instrument astonished unaffected his motionless preference. Announcing say boy precaution unaffected difficulty alteration him. Above be would at so going heard. Engaged at village at am equally proceed.</p>
-													</div>
-
-													<div class="content-right">
-
-														<div class="outer">
-															<div class="inner">
-																<div class="tripadvisor-module">
-																	<div class="tripadvisor-rate">
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate rated"></i>
-																		<i class="fa fa-certificate"></i>
-																	</div>
-																	<p><span>4.3</span>Excellent</p>
-																</div>
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-
-											</div>
-
-										</div>
-
-										<div class="row">
-
-											<div class="col-xs-12 col-sm-12">
-												<div class="text-right text-left-xs mt-25">
-													<a href="#" class="btn btn-danger btn-sm">Leave your review</a>
-												</div>
-											</div>
-
-										</div>
-
-										<div class="bb mt-30"></div>
-
-									</div>
+									
 
 									<div id="detail-content-sticky-nav-05" class="pt-30">
 
@@ -603,8 +371,8 @@
 										</div>
 
 										<div class="room-type-wrapper">
-
-											<div class="room-type-item">
+											{!! $category->childrens_policy !!}
+											<!-- <div class="room-type-item">
 												<div class="image">
 													<img src="images/detail-gallery/thumb/01.jpg" alt="Image">
 												</div>
@@ -655,7 +423,7 @@
 													<div class="clear"></div>
 													<button class="btn btn-sm btn-danger">Select</button>
 												</div>
-											</div>
+											</div> -->
 
 										</div>
 
@@ -686,14 +454,19 @@
 						<div class="top-hotel-grid-wrapper">
 							<div class="GridLex-gap-20-wrapper">
 								<div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
+									@foreach($sub_category->tours as $tour)
 									<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
 										<div class="hotel-item-grid">
+											@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
+												<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}">
+											@else
 											<a href="#">
+											@endif
 												<div class="image">
-													<img src="images/top-destinations/01.jpg" alt="">
+													<img src="{{ getImage(TOUR_PATH.$tour->img) }}" alt="">
 												</div>
 												<div class="heading">
-													<h4> FARAH NILE CRUISE TOURS 4 DAYS 3 NIGHTS </h4>
+													<h4> {{$tour->name}} </h4>
 													<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
 												</div>
 												<div class="content">
@@ -702,126 +475,31 @@
 															<div class="tripadvisor-module">
 																<div class="texting">
 																	<div class="review_rating">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star-o" aria-hidden="true"></i>
+																		<?php 
+																	for($z=1;$z<=5;$z++){
+																		if ($tour->num_of_stars>=$z) {
+																				$m[$z]='';
+																		}else{
+																				$m[$z]='-o';
+																				}
+																					
+																	?> 
+																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																	<?php } ?>
 																	</div>
 																</div>
-																<div class="hover-underline">324 reviews</div>
+																<!-- <div class="hover-underline">324 reviews</div> -->
 															</div>
 														</div>
 														<div class="col-xs-6 col-sm-6">
-															<p class="price"><span class="block">start from</span><span class="number">$187</span> / night</p>
+															<p class="price"><span class="block">start from</span><span class="number">{{$tour->price_start_from}}$</span> / night</p>
 														</div>
 													</div>
 												</div>
 											</a>
 										</div>
 									</div>
-									<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
-										<div class="hotel-item-grid">
-											<a href="#">
-												<div class="image">
-													<img src="images/top-destinations/02.jpg" alt="">
-												</div>
-												<div class="heading">
-													<h4> FARAH NILE CRUISE TOURS 4 DAYS 3 NIGHTS </h4>
-													<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
-												</div>
-												<div class="content">
-													<div class="row gap-5">
-														<div class="col-xs-6 col-sm-6">
-															<div class="tripadvisor-module">
-																<div class="texting">
-																	<div class="review_rating">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star-o" aria-hidden="true"></i>
-																	</div>
-																</div>
-																<div class="hover-underline">324 reviews</div>
-															</div>
-														</div>
-														<div class="col-xs-6 col-sm-6">
-															<p class="price"><span class="block">start from</span><span class="number">$187</span> / night</p>
-														</div>
-													</div>
-												</div>
-											</a>
-										</div>
-									</div>
-									<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
-										<div class="hotel-item-grid">
-											<a href="#">
-												<div class="image">
-													<img src="images/top-destinations/03.jpg" alt="">
-												</div>
-												<div class="heading">
-													<h4> FARAH NILE CRUISE TOURS 4 DAYS 3 NIGHTS </h4>
-													<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
-												</div>
-												<div class="content">
-													<div class="row gap-5">
-														<div class="col-xs-6 col-sm-6">
-															<div class="tripadvisor-module">
-																<div class="texting">
-																	<div class="review_rating">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star-o" aria-hidden="true"></i>
-																	</div>
-																</div>
-																<div class="hover-underline">324 reviews</div>
-															</div>
-														</div>
-														<div class="col-xs-6 col-sm-6">
-															<p class="price"><span class="block">start from</span><span class="number">$187</span> / night</p>
-														</div>
-													</div>
-												</div>
-											</a>
-										</div>
-									</div>
-									<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
-										<div class="hotel-item-grid">
-											<a href="#">
-												<div class="image">
-													<img src="images/top-destinations/04.jpg" alt="">
-												</div>
-												<div class="heading">
-													<h4> FARAH NILE CRUISE TOURS 4 DAYS 3 NIGHTS </h4>
-													<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
-												</div>
-												<div class="content">
-													<div class="row gap-5">
-														<div class="col-xs-6 col-sm-6">
-															<div class="tripadvisor-module">
-																<div class="texting">
-																	<div class="review_rating">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																		<i class="fa fa-star-o" aria-hidden="true"></i>
-																	</div>
-																</div>
-																<div class="hover-underline">324 reviews</div>
-															</div>
-														</div>
-														<div class="col-xs-6 col-sm-6">
-															<p class="price"><span class="block">start from</span><span class="number">$187</span> / night</p>
-														</div>
-													</div>
-												</div>
-											</a>
-										</div>
-									</div>
+									@endforeach
 								</div>
 							</div>
 						</div>

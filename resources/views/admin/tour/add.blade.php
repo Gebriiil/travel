@@ -283,6 +283,26 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>
+                                                Breakfast
+                                            </label>
+                                            <input type="checkbox" class="form-control" name="breakfast" style="margin-left: 5px; width: 35px;" value="1" />
+                                            <span></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>
+                                                Wifi
+                                            </label>
+                                            <input type="checkbox" class="form-control" name="wifi" style="margin-left: 0; width: 40px;" value="1" />
+                                            <span></span>
+
+                                        </div>
+                                    </div>
 
 
 

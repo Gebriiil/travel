@@ -204,9 +204,9 @@
 								
 
 								</div>
-								<div class="hotel-item-list-wrapper mb-40" id="list_container">
+								<div class="hotel-item-list-wrapper mb-40" id="list_container" >
 									<div class="hotel-item-list-wrapper mb-40" >
-
+										@foreach($tours as $tour)
 										<div class="hotel-item-list">
 												<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$tour->img) }}');"></div>
 												<div class="content">
@@ -228,20 +228,27 @@
 																Very Good
 															</div>
 															<div class="review_rating">
-																<i class="fa fa-star" aria-hidden="true"></i>
-																<i class="fa fa-star" aria-hidden="true"></i>
-																<i class="fa fa-star" aria-hidden="true"></i>
-																<i class="fa fa-star" aria-hidden="true"></i>
-																<i class="fa fa-star-o" aria-hidden="true"></i>
+																<?php 
+																for($z=1;$z<=5;$z++){
+																	if ($tour->num_of_stars>=$z) {
+																						$m[$z]='';
+																				}else{
+																						$m[$z]='-o';
+																						}
+																					
+																	?>
+																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																	<?php } ?>
 															</div>
 														</a>
 													</div>
 													<div class="price-wrapper">
-														<p class="price"><span class="block">start from</span><span class="number">$187</span> <span class="block">avg / night</span></p>
+														<p class="price"><span class="block">start from</span><span class="number">{{$tour->price_start_from}}$</span> <span class="block">avg / night</span></p>
 														<a href="#" class="btn btn-danger btn-sm">Details</a>
 													</div>
 												</div>
 										</div>
+										@endforeach
 									</div>
 								</div>
 								
@@ -517,44 +524,7 @@
 											</div>
 										</div>
 
-										<div class="another-toggle filter-toggle">
-											<h4 class="active">Radio Filter Widget</h4>
-											<div class="another-toggle-content">
-												<div class="another-toggle-inner">
-													<div class="radio-block font-icon-radio">
-														<input id="radio_block_1" name="radio_block" type="radio" class="radio" value="First Choice" checked="checked" />
-														<label class="" for="radio_block_1">Apart-hotel‎</label>
-													</div>
-
-													<div class="radio-block font-icon-radio">
-														<input id="radio_block_2" name="radio_block" type="radio" class="radio" value="Second Choice" />
-														<label class="" for="radio_block_2">Apartment‎</label>
-													</div>
-													<div class="radio-block font-icon-radio">
-														<input id="radio_block_3" name="radio_block" type="radio" class="radio" value="Third Choice" />
-														<label class="" for="radio_block_3">Bed and Breakfast‎</label>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="another-toggle filter-toggle">
-											<h4 class="active">Select Filter Widget</h4>
-											<div class="another-toggle-content">
-												<div class="another-toggle-inner">
-													<div class="form-group mb-0">
-														<select class="custom-select" id="gender">
-															<option value="0">Please Select</option>
-															<option value="1">Family-friendly‎</option>
-															<option value="2">Romantic‎</option>
-															<option value="3">Shopping‎</option>
-															<option value="4">Spa Hotel‎</option>
-															<option value="5">Luxury‎</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
+										
 
 
 									</div>

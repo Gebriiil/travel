@@ -31,6 +31,8 @@ class Tour extends Model
       'seo',
       'slug',
       'num_of_stars',
+      'breakfast',
+      'wifi',
     ];
 
 
