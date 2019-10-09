@@ -46,7 +46,7 @@
                         }
                         if(data.code==0){     
                             Swal.fire({
-                              title: '{{trans("site.email_error")}}',
+                              title: '{{trans("site.error")}}',
                               text: data.msg,
                               type: 'error',
                               showCancelButton: false,
@@ -62,7 +62,7 @@
                         $.each(xhr.responseJSON.errors, function (key, item)
                         {
                             Swal.fire({
-                              title: '{{trans("site.email_error")}}',
+                              title: '{{trans("site.error")}}',
                               text: item,
                               type: 'error',
                               showCancelButton: false,

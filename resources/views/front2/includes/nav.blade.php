@@ -13,13 +13,13 @@
 				<div class="container">
 						
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#"> <img src="{{furl()}}/images/logo.png" class="logo_main"> </a>
+						<a class="navbar-brand" href="{{murl('/')}}"> <img src="{{furl()}}/images/logo.png" class="logo_main"> </a>
 					</div>
 						
 					<div id="navbar" class="collapse navbar-collapse navbar-arrow pull-left">
 					
 						<ul class="nav navbar-nav" id="responsive-menu">
-							<li><a href="#">Home </a></li>
+							<li><a href="{{murl('/')}}">Home </a></li>
 							<li>
 								<a href="#">DAY TOURS</a>
 								<ul>
@@ -88,10 +88,18 @@
 										<span class="caret"></span>
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="language-dropdown">
-										<li><a href="#">English</a></li>
-										<li><a href="#">France</a></li>
-										<li><a href="#">Japanese</a></li>
-									</ul>
+                                    @foreach (languages() as $item)
+                                    <li>
+                                        <a href="{{ route('front.get.home.switch.language',$item->symbol) }}">
+                                        <img style="height: 20px;width:20px;display: inline"
+                                        alt="{{ $item->name }}" title="{{ $item->name }}"
+                                        src="{{ getImage(LANGUAGE_PATH.$item->icon) }}">
+                                        <p style="display: inline">{{ $item->name }}</p>
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                  
+                                </ul>
 								</li>
 							</ul>
 						</div>

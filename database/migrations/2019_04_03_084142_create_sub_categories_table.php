@@ -19,6 +19,8 @@ class CreateSubCategoriesTable extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('name');
             $table->string('img');
             $table->string('cover')->nullable();

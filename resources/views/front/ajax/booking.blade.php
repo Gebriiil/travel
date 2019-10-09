@@ -5,7 +5,7 @@
 
 
         //submit message request
-        $('#button_submit').on('click', function (e) { //use on if jQuery 1.7+
+        $('#button_submit_booking').on('click', function (e) { //use on if jQuery 1.7+
             e.preventDefault();  //prevent form from submitting
 
             var tour_id = $('#tour_id').val();
@@ -24,50 +24,50 @@
 
             if (!tour_id.length > 0) {
                 //alert('insert tour id');
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
             }
             if (!checkin.length > 0) {
                 //alert('insert checkin');
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
             }
             else if (!checkout.length > 0) {
                 //alert('insert checkout');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
             }
             else if (!adults.length > 0) {
                 //alert('insert adults');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
             }
             else if (!childrens.length > 0) {
                // alert('insert childrens');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
             }
             else if (!name.length > 0) {
                 //alert('insert name');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
 
             } else if (!email.length > 0) {
                 //alert('insert email');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
 
             } else if (!phone.length > 0) {
                 //alert('insert phone');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
 
             } else if (!nationality.length > 0) {
                 //alert('insert nationality');
 
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
 
             } 
             else if (!message.length > 0) {
-                $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
+                $('#booking-error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> {{trans('site.all_fields_are_required')}}</h3>");
 
             }
             else {
@@ -93,17 +93,43 @@
                     cache: false,
                     success: function (data) {
                         if (data.code == 1) {
-                            clearMessageInputs();
-                            $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-success'><i class='fa fa-info'></i> " + data.msg + "</h3>");
+                            // clearMessageInputs();
+                            // $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-success'><i class='fa fa-info'></i> " +  + "</h3>");
+                            Swal.fire({
+                                title: '{{trans("site.success")}}',
+                                html: data.msg,
+                                type: 'success',
+                                 showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                 confirmButtonText: '{{trans("site.ok")}}'
+                             });
                         } else {
-                            $('#error-msg').html("<h3 style='display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> " + data.msg + "</h3>");
+                            Swal.fire({
+                                title: '{{trans("site.error")}}',
+                                html: data.msg,
+                                type: 'error',
+                                 showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                 confirmButtonText: '{{trans("site.ok")}}'
+                             });
                         }
                     }, error: function (xhr,status,data) {
-                        $.each(xhr.responseJSON.errors, function (key, item)
-                        {
-                            //$('#error-msg').html("<h3 style='word-wrap:break-spaces;display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> " + item + "</h3>");
-                            $("#error-msg").append("<li class='alert alert-danger show-errors'>"+item+"</li>")
-                        });
+                        
+                            //$('#error-msg').html("<h3 style='word-wrap:break-spaces;display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> " + item + "</h3>"); 
+                            // $("#booking-error-msg").append("<li class='alert alert-danger show-errors'>"+item+"</li>")
+                            var errorsMsg;
+                            $.each(xhr.responseJSON.errors, function (key, item){
+                                errorsMsg += item+'<br/>';
+                                
+                            });
+                        Swal.fire({
+                            title: '{{trans("site.email_error")}}',
+                            html: errorsMsg,
+                            type: 'error',
+                             showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                             confirmButtonText: '{{trans("site.ok")}}'
+                         });
 
                     }
                 });

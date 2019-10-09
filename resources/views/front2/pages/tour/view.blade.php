@@ -26,7 +26,7 @@
 
 				<div class="two-tone-layout">
 
-					<div class="equal-content-sidebar">
+					<div class="equal-content-sidebar"> 
 						<div class="container">
 
 
@@ -36,17 +36,17 @@
 									<div class="detail-right-sidebar">
 										<div class="box_price">
 											<h3>DETAILS TOURS</h3>
-											<span>CATEGORY</span>
+											<span>{{$category->name}}</span>
 											<p>EGYPT SHORE EXCURSIONS</p>
 
 											<span>PRICE</span>
-											<p>250.00 $ / PERSON</p>
+											<p> {{$tour->price_start_from}}$/ PERSON</p>
 
 											<span>LOCATION</span>
-											<p>ALEXANDRIA</p>
+											<p>{{$category->country->name}}</p>
 
 											<span>DATE</span>
-											<p>2019-03-17 23:12:52</p>
+											<p>{{$tour->created_at}}</p>
 
 											<span>HOTEL CLASS</span>
 											<p>
@@ -63,81 +63,66 @@
 										<div class="price">
 											<span class="number text-left">Booking</span>
 										</div>
-
+										<div id="booking-error-msg"></div>
 										<div class="detail-search-form">
 											<div class="inner">
 												<form class="gap-10">
 													<div class="col-xs-12 col-sm-12">
 														<div class="form-group form-icon-right mb-10">
 															<label>Name</label>
-															<input type="text" class="form-control mb-0" placeholder="name" >
+															<input type="text" class="form-control mb-0" placeholder="name" id="namez">
+															<input type="hidden" id="tour_id" value="{{$tour->id}}">
 															<i class="fa fa-user"></i>
 														</div>
 													</div>
 													<div class="col-xs-12 col-sm-12">
 														<div class="form-group form-icon-right mb-10">
 															<label>Email</label>
-															<input type="text" class="form-control mb-0" placeholder="Email" >
+															<input type="text" class="form-control mb-0" placeholder="Email" id="emailz">
 															<i class="fa fa-envelope-o"></i>
 														</div>
 													</div>
 													<div class="col-xs-12 col-sm-12">
 														<div class="form-group form-icon-right mb-10">
 															<label>Phone</label>
-															<input type="text" class="form-control mb-0" placeholder="Phone" >
+															<input type="text" class="form-control mb-0" placeholder="Phone" id="phonez">
 															<i class="fa fa-phone"></i>
 														</div>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-12">
 														<div class="form-group form-icon-right mb-10">
 															<label>Nationality</label>
-															<select name="custom-select-3" class="form-control styled-select" tabindex="1">
-																<option value="1">Egypt</option>
-																<option value="2">Egypt</option>
-																<option value="3">Egypt</option>
-																<option value="4">Egypt</option>
+															<select name="custom-select-3" class="form-control styled-select" tabindex="1" id="nationality">
+																@include('front.tour.countries_dropdown')
 															</select>
 														</div>
 													</div>
 													<div class="col-xs-12 col-sm-12">
 														<div class="form-group form-icon-right mb-10">
-															<label>Where do you want to go?</label>
-															<input type="text" class="form-control mb-0" placeholder="City or Airport" >
-															<i class="fa fa-map-marker"></i>
+															<label>Message</label>
+															<textarea type="text" class="form-control mb-0" placeholder="" id="message"></textarea>
+															<!-- <i class="fa fa-map-marker"></i> -->
 														</div>
 													</div>
 													<div class="col-xs-6 col-sm-6">
 														<div class="form-group form-icon-right mb-10">
 															<label>Check-in</label>
-															<input name="arrival_date" class="form-control mb-0" id="dpd1" placeholder="Check-in" type="text">
+															<input name="dpd1" class="form-control" id="check_in_date" placeholder="Check-in" type="date"  >
 															<i class="fa fa-calendar"></i>
 														</div>
 													</div>
 													<div class="col-xs-6 col-sm-6">
 														<div class="form-group form-icon-right mb-10">
 															<label>Check-out</label>
-															<input name="departure_date" class="form-control mb-0" id="dpd2" placeholder="Check-out" type="text">
+															<input name="departure_date" class="form-control mb-0" id="check_out_date" placeholder="Check-out" type="date">
 															<i class="fa fa-calendar"></i>
-														</div>
-													</div>
-													<div class="col-xs-4 col-sm-4">
-														<div class="form-group">
-															<label>Rooms</label>
-															<select class="custom-select" id="change-search-room">
-																<option value="0">Room</option>
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4‎</option>
-																<option value="5">5</option>
-															</select>
 														</div>
 													</div>
 													<div class="col-xs-4 col-sm-4 col-md-4">
 
 														<div class="form-group">
 															<label>Adults</label>
-															<select class="custom-select" id="change-search-adult">
+															<select class="custom-select" id="adults">
 																<option value="0">Adult</option>
 																<option value="1">1</option>
 																<option value="2">2</option>
@@ -151,7 +136,7 @@
 
 														<div class="form-group">
 															<label>Children</label>
-															<select class="custom-select" id="change-search-child">
+															<select class="custom-select" id="childrens">
 																<option value="0">Child</option>
 																<option value="1">1</option>
 																<option value="2">2</option>
@@ -165,7 +150,7 @@
 													<div class="clear"></div>
 
 													<div class="col-sm-12">
-														<button class="btn btn-block btn-icon btn-primary">Book Now <span class="icon"><i class="fa fa-long-arrow-right"></i></span></button>
+														<button class="btn btn-block btn-icon btn-primary" id="button_submit_booking">Book Now <span class="icon"><i class="fa fa-long-arrow-right"></i></span></button>
 													</div>
 
 													<div class="clear mb-10"></div>

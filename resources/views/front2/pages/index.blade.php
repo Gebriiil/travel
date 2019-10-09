@@ -142,7 +142,7 @@
 							<div class="GridLex-col-3_sm-4_xs-6_xss-12">
 
 								<div class="top-destination-item">
-									<a href="#">
+									<a href="{{ route('front.get.category.index',$category->slug) }}">
 										<div class="image">
 											<img src="
 											{{ getImage(TOUR_PATH.$category->img) }}" alt="{{ json_value($category,'img_alt') }}" title="{{ json_value($category,'img_title') }}">

@@ -2,7 +2,7 @@
 
 
     $(document).ready(function () {
-        showList();
+        showGrid();
 
         $('#grid_btn').on('click', function (e) {
             e.preventDefault();  //prevent form from submitting

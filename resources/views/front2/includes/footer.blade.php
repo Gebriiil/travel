@@ -149,6 +149,7 @@
 	<script type="text/javascript" src="{{furl()}}/js/customs-detail-page.js"></script>
 	@include('front.ajax.subscribe')
 	@include('front.ajax.tours')
+	@include('front.ajax.booking')
 
 </body>
 

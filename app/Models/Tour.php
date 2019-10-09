@@ -13,6 +13,7 @@ class Tour extends Model
     protected $fillable = [
       'language_id',
       'sub_category_id',
+      'city_id',
       'name',
       'small_desc',
       'show_in_special_offers',
@@ -38,7 +39,11 @@ class Tour extends Model
 
     public function subCategory()
     {
-        return $this->belongsTo('App\Models\SubCategory','id','category_id');
+        return $this->belongsTo(SubCategory::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(city::class);
     }
 
 

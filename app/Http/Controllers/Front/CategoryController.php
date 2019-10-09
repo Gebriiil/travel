@@ -15,12 +15,14 @@ class CategoryController extends ParentController
     public function index($categorySlug)
     {
         // check if this category exist or not 
-        $check = Category::where('slug',$categorySlug)->first();
+        $category = Category::where('slug',$categorySlug)->first();
 
-        if($check)
+        if($category->sub()->count()>0)
         {
-            $data['row'] = $check;
-            return view('front.category.index')->with($data);
+            $data['row'] = $category;
+            $subs=$category->sub;
+            
+            return view('front2.pages.category_tours',compact('category','subs'));
         }
         return redirect(url('/'));
     }
