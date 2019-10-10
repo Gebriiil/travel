@@ -115,6 +115,18 @@
                                                placeholder="Price Start From" required
                                                value="{{ old('price_start_from') }}"></div>
                                 </div>
+                                <!-- City -->
+                                <div class="form-group col-sm-5">
+                                    <label> @lang('site.city') </label>
+                                    <div class="input-group">
+                                <span class="input-group-addon input-circle-left">
+                                    <i class="fa fa-text-width"></i>
+                                </span>
+                                        <input type="text" name="city"
+                                               class="form-control input-circle-right "
+                                               placeholder="City" required
+                                               value="{{ old('city') }}"></div>
+                                </div>
                         
                                 
                             

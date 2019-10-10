@@ -41,7 +41,7 @@ Route::group(
             Route::get('/switch-lang/{slug}', 'HomeController@switchLanguage')->name('get.home.switch.language');
             Route::get('/switch-currency/{slug}', 'HomeController@switchCurrency')->name('get.home.switch.currency');
             Route::get('/{categorySlug}', 'CategoryController@index')->name('get.category.index');
-            Route::get('/{categorySlug}/{subCategorySlug}', 'SubCategoryController@index')->name('get.subCategory.index');
+            Route::get('Category/{categorySlug}/{subCategorySlug}', 'CategoryController@index');
             Route::get('/{categorySlug}/{subCategorySlug}/filter', 'SubCategoryController@filter')->name('get.subCategory.filter');
             // Route::get('/{categorySlug}/{subCategorySlug}/{tourSlug}', 'TourController@index')->name('get.tour.index');
             Route::post('/search-tour', 'SubCategoryController@searchTours');

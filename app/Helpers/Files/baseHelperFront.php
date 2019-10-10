@@ -70,7 +70,7 @@ if (!function_exists('getPrice')) {
 
     function getPrice($amount)
     {
-        $rate = session('convertionRate', '1');
+        $rate = session('convertionRate', 1);
         return round($amount * $rate,1);
     }
     /*array:5 [▼

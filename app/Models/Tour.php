@@ -26,6 +26,7 @@ class Tour extends Model
       'cover_alt',
       'cover_title',
       'price_start_from',
+      'city',
       'inclusion',
       'exclusion',
       'price_table_id',

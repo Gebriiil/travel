@@ -31,58 +31,21 @@
 						<div class="col-sm-12 col-sm-7 col-md-8">
 
 							<div class="row gap-20">
-
+								@foreach ($categories->take(4) as $item)
+                				@if($item->sub->count()>0)
 								<div class="col-xss-12 col-xs-3 col-sm-3 mt-30-xs">
 
-									<h4 class="footer-title">DAY TOURS</h4>
+									<h4 class="footer-title">{{ $item->name }}</h4>
 
 									<ul class="menu-footer">
-										<li><a href="#">SHARM EL SHEIKH</a></li>
-										<li><a href="#">GIZA</a></li>
-										<li><a href="#">ALEXANDRIA</a></li>
-										<li><a href="#">DAHAB</a></li>
-										<li><a href="#">LUXOR</a></li>
-										<li><a href="#">HURGHADA</a></li>
+										@foreach ($item->sub as $sub)
+										<li><a href="{{ murl('Category/'.$item->slug.'/'.$sub->slug) }}">{{ $sub->name }}</a></li>
+										@endforeach
 									</ul>
 
 								</div>
-
-								<div class="col-xss-12 col-xs-3 col-sm-3 mt-30-xs">
-
-									<h4 class="footer-title">SPIRITUAL TOURS</h4>
-
-									<ul class="menu-footer">
-										<li><a href="#">Egypt Spiritual Tour</a></li>
-										<li><a href="#">ASWAN- LUXOR</a></li>
-										<li><a href="#">LAKE NASSER CRUISE</a></li>
-										<li><a href="#">DAHABYA</a></li>
-									</ul>
-
-								</div>
-
-								<div class="col-xss-12 col-xs-3 col-sm-3 mt-30-xs">
-
-									<h4 class="footer-title">NILE CRUISES EGYPT</h4>
-									<ul class="menu-footer for-social">
-										<li><a href="#">Egypt Spiritual Tour</a></li>
-										<li><a href="#">ASWAN- LUXOR</a></li>
-										<li><a href="#">LAKE NASSER CRUISE</a></li>
-										<li><a href="#">DAHABYA</a></li>
-									</ul>
-
-								</div>
-
-								<div class="col-xss-12 col-xs-3 col-sm-3 mt-30-xs">
-
-									<h4 class="footer-title">EGYPT SHORE EXCURSIONS</h4>
-									<ul class="menu-footer for-social">
-										<li><a href="#">Egypt Spiritual Tour</a></li>
-										<li><a href="#">ASWAN- LUXOR</a></li>
-										<li><a href="#">LAKE NASSER CRUISE</a></li>
-										<li><a href="#">DAHABYA</a></li>
-									</ul>
-
-								</div>
+								@endif
+								@endforeach
 
 							</div>
 

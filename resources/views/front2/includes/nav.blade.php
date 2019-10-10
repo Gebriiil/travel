@@ -20,47 +20,18 @@
 					
 						<ul class="nav navbar-nav" id="responsive-menu">
 							<li><a href="{{murl('/')}}">Home </a></li>
+							@foreach ($categories->take(4) as $item)
+                			@if($item->sub->count()>0)
 							<li>
-								<a href="#">DAY TOURS</a>
+								<a href="#">{{ $item->name }}</a>
 								<ul>
-									<li><a href="#">SHARM EL SHEIKH</a></li>
-									<li><a href="#">GIZA</a></li>
-									<li><a href="#">ALEXANDRIA</a></li>
-									<li><a href="#">DAHAB</a></li>
-									<li><a href="#">LUXOR</a></li>
-									<li><a href="#">ASWAN</a></li>
-									<li><a href="#">HURGHADA</a></li>
-									<li><a href="#">CAIRO</a></li>
-
+									@foreach ($item->sub as $sub)
+									<li><a href="{{ murl('Category/'.$item->slug.'/'.$sub->slug) }}">{{ $sub->name }}</a></li>
+									@endforeach
 								</ul>
 							</li>
-
-							<li><a href="#">SPIRITUAL TOURS <span class="caret"></span> </a>
-								<ul>
-									<li><a href="#">SHARM EL SHEIKH</a></li>
-									<li><a href="#">Egypt Spiritual Tour</a></li>
-									<li><a href="#">ALEXANDRIA</a></li>
-									<li><a href="#">DAHAB</a></li>
-								</ul>
-							</li>
-							<li><a href="#">EGYPT SHORE EXCURSIONS <span class="caret"></span> </a>
-								<ul>
-									<li><a href="#">Alexandria Short Excursions</a></li>
-									<li><a href="#">Safaga Shore Excursions</a></li>
-									<li><a href="#">Port Said Shore Excursions</a></li>
-									<li><a href="#">Aqaba Shore Excursions</a></li>
-								</ul>
-							</li>
-							<li><a href="#">EGYPT TRAVEL PACKAGES <span class="caret"></span> </a>
-								<ul>
-									<li><a href="#">Egypt Classic Tours</a></li>
-									<li><a href="#">Red Sea packages</a></li>
-									<li><a href="#">Honeymoon Packages</a></li>
-									<li><a href="#">Safari Egypt</a></li>
-									<li><a href="#">Egypt Short Tours</a></li>
-									<li><a href="#">Egypt Budget Tours</a></li>
-								</ul>
-							</li>
+							@endif
+							@endforeach
 							<li><a href="#">CONTACT US</a></li>
 
 						</ul>
@@ -73,13 +44,12 @@
 							<ul class="clearfix">
 								<li class="dropdown bt-dropdown-click">
 									<a id="currency-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-										<i class="ion-social-usd hidden-xss"></i> Dollar
-										<span class="caret"></span>
+										<i class="ion-social-usd hidden-xss"></i> {{getCurrency()}}
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="currency-dropdown">
-										<li><a href="#"><i class="ion-social-usd"></i> Dollar</a></li>
-										<li><a href="#"><i class="ion-social-euro"></i> Europe</a></li>
-										<li><a href="#"><i class="ion-social-yen"></i> Yen</a></li>
+										<li><a href="/switch-currency/USD"><i class="ion-social-usd"></i> Dollar</a></li>
+										<li><a href="/switch-currency/EUR"><i class="ion-social-euro"></i> Europe</a></li>
+										<li><a href="/switch-currency/YER"><i class="ion-social-yen"></i> Yen</a></li>
 									</ul>
 								</li>
 								<li class="dropdown bt-dropdown-click">

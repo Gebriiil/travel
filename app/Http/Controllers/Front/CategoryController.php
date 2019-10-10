@@ -16,13 +16,14 @@ class CategoryController extends ParentController
     {
         // check if this category exist or not 
         $category = Category::where('slug',$categorySlug)->first();
-
-        if($category->sub()->count()>0)
-        {
-            $data['row'] = $category;
-            $subs=$category->sub;
-            
-            return view('front2.pages.category_tours',compact('category','subs'));
+        if(isset($category->sub)){
+            if($category->sub->count()>0)
+            {
+                $data['row'] = $category;
+                $subs=$category->sub;
+                
+                return view('front2.pages.subcategory_tours',compact('category','subs'));
+            }
         }
         return redirect(url('/'));
     }

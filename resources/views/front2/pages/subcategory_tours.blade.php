@@ -1,6 +1,6 @@
 @extends('front2.master')
 @section('content')
-	@if(isset($tours))
+	@if(isset($subs))
 		<div class="not-home">
 			<!-- start Main Wrapper -->
 			<div class="main-wrapper">
@@ -114,6 +114,7 @@
 											</form>
 										</div>
 									</div>
+									
 									<div class="result-filter-wrapper clearfix">
 
 										<h3><span class="icon"><i class="fa fa-sliders"></i></span> Filter</h3>
@@ -332,23 +333,26 @@
 									</ul>
 
 								</div>
-								@if($tours)
+
 								<div class="top-hotel-grid-wrapper" id="grid_container">
 
 									<div class="row gap-20 min-height-alt" >
-										@foreach($tours as $tour)
+										@foreach($subs as $sub)
+										@foreach($sub->tours as $tour)
 										<div class="col-xss-12 col-xs-12 col-sm-6 col-mdd-6 col-md-4" data-match-height="result-grid" >
 
 											<div class="hotel-item-grid">
 										@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
 												<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}">
+										@else
+										<a href=""></a>
 										@endif
 													<div class="image">
-														<img src="{{ getImage(TOUR_PATH.$tour->img) }}" alt="{{ json_value($tour,'img_alt') }}" title="{{ json_value($tour,'img_title') }}">
+														<img src="{{ getImage(TOUR_PATH.$tour->img) }}" alt="{{ json_value($tour,'img_alt') }}" title="{{ json_value($tour,'img_title') }}" style="height: 200px;width: 100%">
 													</div>
 													<div class="heading">
 														<h4>  {{$tour->name}} </h4>
-														<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
+														<p><i class="fa fa-map-marker text-primary"></i> {{$tour->city?$tour->city.',':''}} Egypt</p>
 													</div>
 													<div class="content">
 														<div class="row gap-5">
@@ -373,7 +377,7 @@
 																</div>
 															</div>
 															<div class="col-xs-6 col-sm-6">
-																<p class="price"><span class="block">start from</span><span class="number">{{$tour->price_start_from}}$</span> / night</p>
+																<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / night</p>
 															</div>
 														</div>
 													</div>
@@ -381,7 +385,7 @@
 											</div>
 
 										</div>
-										
+										@endforeach
 										@endforeach
 									</div>
 									
@@ -390,7 +394,9 @@
 								</div>
 								<div class="hotel-item-list-wrapper mb-40" id="list_container" >
 									<div class="hotel-item-list-wrapper mb-40" >
-										@foreach($tours as $tour)
+
+										@foreach($subs as $sub)
+										@foreach($sub->tours as $tour)
 										<div class="hotel-item-list">
 												<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$tour->img) }}');"></div>
 												<div class="content">
@@ -403,7 +409,13 @@
 													</div>
 												</div>
 												<div class="absolute-bottom">
-													<p class="text-primary"><i class="fa fa-check-circle"></i> Breakfast Included <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p>
+													<p class="text-primary">
+														@if($tour->breakfast==1)
+														<i class="fa fa-check-circle"></i> Breakfast Included
+														@endif
+														@if($tour->wifi==1)
+														 <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p>
+														 @endif
 												</div>
 												<div class="absolute-right">
 													<div class="meta-option">
@@ -427,11 +439,15 @@
 														</a>
 													</div>
 													<div class="price-wrapper">
-														<p class="price"><span class="block">start from</span><span class="number">{{$tour->price_start_from}}$</span> <span class="block">avg / night</span></p>
-														<a href="#" class="btn btn-danger btn-sm">Details</a>
+														<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / night</span></p>
+														@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
+														<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">Details</a>
+														@endif
 													</div>
 												</div>
 										</div>
+										
+										@endforeach
 										@endforeach
 									</div>
 								</div>
@@ -441,7 +457,6 @@
 
 								
 
-								@endif
 								
 								<div class="mb-20"></div>
 

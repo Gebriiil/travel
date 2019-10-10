@@ -63,18 +63,11 @@ class HomeController extends ParentController
     {
 
         // Store a piece of data in the session...
-        if ($slug == 'USD') {
-            session(['CURRENCY' => $slug]);
-            session(['convertionRate' => 1]);
-        } else if ($slug == 'EUR') {
-            session(['CURRENCY' => $slug]);
-            $response = Currency::getRates();
-            session(['convertionRate' => $response->rates->EUR]);
-        } else if ($slug == 'GBP') {
-            session(['CURRENCY' => $slug]);
-            $response = Currency::getRates();
-            session(['convertionRate' => $response->rates->GBP]);
-        }
+
+        session(['CURRENCY' => $slug]);
+        $response = Currency::getRates();
+        session(['convertionRate' => $response->rates->{$slug}]);
+
 
         return redirect()->back();
 

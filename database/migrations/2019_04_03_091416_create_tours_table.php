@@ -27,6 +27,7 @@ class CreateToursTable extends Migration
             $table->decimal('price_start_from')->default(0);
             $table->text('inclusion');
             $table->text('exclusion');
+            $table->text('city');
             $table->unsignedInteger('price_table_id')->nullable();
             $table->enum('show_in_special_offers', ['yes', 'no'])->default('no');
             $table->enum('num_of_stars', ['1', '2', '3', '4', '5', '6','7'])->default('5');
