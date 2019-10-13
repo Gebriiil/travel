@@ -67,7 +67,7 @@
 
         </ul>
         </li>
-        <!-- 
+        
         <li class="nav-item {{ sidebar_base('language')  }} ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="fa fa-language"></i>
@@ -87,7 +87,28 @@
                 </li>
 
             </ul>
-        </li> -->
+        </li>
+
+        <li class="nav-item {{ sidebar_base('tags')  }} ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-language"></i>
+                <span class="title">@lang('site.tags')</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item {{ sidebar_base('tags','add')  }}">
+                    <a href="" class="nav-link ">
+                        <span class="title">@lang('site.add')</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ sidebar_base('tags','all')  }} ">
+                    <a href="" class="nav-link ">
+                        <span class="title">@lang('site.view')</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
 
 
 

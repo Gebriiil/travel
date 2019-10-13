@@ -99,6 +99,9 @@ function()
             Route::get('/seo/{id}','SubCategoryController@seo')->name('get.subCategory.seo')->where('id', '[0-9]+');
             // update data of seo
             Route::post('/seo/update','SubCategoryController@updateSeo')->name('post.subCategory.updateSeo');
+            Route::get('/add-tags','SubCategoryController@add_tags');
+            Route::post('/add/tag','SubCategoryController@store_tags')->name('post.subcategory.tag');
+            Route::get('/tags','SubCategoryController@tags')->name('post.subcategory.tags');
 
 
         });

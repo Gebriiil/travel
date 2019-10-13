@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -223,6 +224,29 @@ class SubCategoryController extends Controller
         $seoData->seo = json_encode($data);
         $seoData->save();
         session()->flash('message', trans('site.updated_success'));
+        return back();
+    }
+    // Add Tags
+    public function add_tags(Request $request)
+    {
+        return view('admin.tags.add');
+    }
+    public function tags()
+    {
+        $tags=Tag::all();
+        return view('admin.tags.index',compact('tags'));
+    }
+    // Add Tags
+    public function store_tags(Request $request)
+    {
+        $data = $request->except('_token','image');
+        // updating data in db
+        if ($request->hasFile('image')) {
+            $img = UploadClass::uploadFile($request, 'image', UPLOADS_PATH . SUBCATEGORY_PATH, $all = true,1100,600,1500,800);
+            $data['image'] = $img;
+            }
+        $tag = Tag::create($data);
+        session()->flash('message', trans('site.sorted_success'));
         return back();
     }
 

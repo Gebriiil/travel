@@ -38,21 +38,21 @@
 											<form class="gap-10">
 												<div class="col-xs-12 col-sm-12">
 													<div class="form-group form-icon-right mb-10">
-														<label> Destination ?</label>
+														<label> {{ site_content($site_content,'destination') }} ?</label>
 														<input type="text" class="form-control mb-0" placeholder="City or Airport" >
 														<i class="fa fa-map-marker"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-in</label>
+														<label>{{ site_content($site_content,'from') }}</label>
 														<input name="arrival_date" class="form-control mb-0" id="dpd1" placeholder="Check-in" type="text">
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-out</label>
+														<label>{{ site_content($site_content,'to') }}</label>
 														<input name="departure_date" class="form-control mb-0" id="dpd2" placeholder="Check-out" type="text">
 														<i class="fa fa-calendar"></i>
 													</div>

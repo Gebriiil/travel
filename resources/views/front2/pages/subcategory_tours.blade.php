@@ -13,9 +13,9 @@
 
 							<div class="col-xs-12 col-sm-8">
 								<ol class="breadcrumb">
-									<li><a href="#">Home</a></li>
-									<li><a href="#">Destinations</a></li>
-									<li class="active">Destination</li>
+									<li><a href="{{murl('/')}}">{{ site_content($site_content,'home') }}</a></li>
+									<li><a href="#">{{ site_content($site_content,'destinations') }}</a></li>
+									<li class="active">{{ site_content($site_content,'destination') }}</li>
 								</ol>
 							</div>
 
@@ -34,30 +34,33 @@
 									<div class="result-search-form-wrapper clearfix">
 
 										<h3>Search Your Trip</h3>
+										<div class="price">
+											<span id="booking-error-msg-sub"></span>
+										</div>
 										<div class="inner">
-											<form class="gap-10">
+											<div class="gap-10">
 												<div class="col-xs-12 col-sm-12">
 													<div class="form-group form-icon-right mb-10">
-														<label> Destination ?</label>
-														<input type="text" class="form-control mb-0" placeholder="City or Airport" >
+														<label> {{ site_content($site_content,'destination') }} ?</label>
+														<input type="text" class="form-control mb-0" placeholder="City or Airport" id="destination-in-subpage">
 														<i class="fa fa-map-marker"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-in</label>
-														<input name="arrival_date" class="form-control mb-0" id="dpd1" placeholder="Check-in" type="text">
-														<i class="fa fa-calendar"></i>
+														<label>{{ site_content($site_content,'from') }}</label>
+														<input  name="from" type="number" autocomplete="off" class="form-control" placeholder="Price-start" id="from-in-subpage">
+														<i class="fa fa-money"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-out</label>
-														<input name="departure_date" class="form-control mb-0" id="dpd2" placeholder="Check-out" type="text">
-														<i class="fa fa-calendar"></i>
+														<label>{{ site_content($site_content,'to') }}</label>
+														<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end" id="to-in-subpage">
+														<i class="fa fa-money"></i>
 													</div>
 												</div>
-												<div class="col-xs-12 col-sm-4">
+												<!-- <div class="col-xs-12 col-sm-4">
 													<div class="form-group">
 														<label>Rooms</label>
 
@@ -96,12 +99,12 @@
 															<option value="5">5</option>
 														</select>
 													</div>
-												</div>
+												</div> -->
 
 												<div class="clear"></div>
 
 												<div class="col-sm-12">
-													<button class="btn btn-block btn-primary btn-icon mt-5">Search <span class="icon"><i class="fa fa-search"></i></span></button>
+													<button class="btn btn-block btn-primary btn-icon mt-5" id="search-subpage">Search <span class="icon"><i class="fa fa-search"></i></span></button>
 												</div>
 
 												<div class="clear mb-10"></div>
@@ -111,16 +114,16 @@
 
 												<div class="clear"></div>
 
-											</form>
+											</div>
 										</div>
 									</div>
 									
 									<div class="result-filter-wrapper clearfix">
 
-										<h3><span class="icon"><i class="fa fa-sliders"></i></span> Filter</h3>
+										<h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'filter') }}</h3>
 
 										<div class="another-toggle filter-toggle">
-											<h4 class="active">Price</h4>
+											<h4 class="active">{{ site_content($site_content,'price') }}</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
 													<div class="range-slider-wrapper">
@@ -131,7 +134,7 @@
 										</div>
 
 										<div class="another-toggle filter-toggle">
-											<h4 class="active">Star Rating</h4>
+											<h4 class="active">{{ site_content($site_content,'star') }}</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
 													<div class="range-slider-wrapper">
@@ -333,131 +336,125 @@
 									</ul>
 
 								</div>
+								<div id="tours-containers-ajax">
+									<div class="top-hotel-grid-wrapper" id="grid_container">
 
-								<div class="top-hotel-grid-wrapper" id="grid_container">
+										<div class="row gap-20 min-height-alt" >
+											@foreach($subs as $sub)
+											@foreach($sub->tours as $tour)
+											<div class="col-xss-12 col-xs-12 col-sm-6 col-mdd-6 col-md-4" data-match-height="result-grid" >
 
-									<div class="row gap-20 min-height-alt" >
-										@foreach($subs as $sub)
-										@foreach($sub->tours as $tour)
-										<div class="col-xss-12 col-xs-12 col-sm-6 col-mdd-6 col-md-4" data-match-height="result-grid" >
-
-											<div class="hotel-item-grid">
-										@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
-												<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}">
-										@else
-										<a href=""></a>
-										@endif
-													<div class="image">
-														<img src="{{ getImage(TOUR_PATH.$tour->img) }}" alt="{{ json_value($tour,'img_alt') }}" title="{{ json_value($tour,'img_title') }}" style="height: 200px;width: 100%">
-													</div>
-													<div class="heading">
-														<h4>  {{$tour->name}} </h4>
-														<p><i class="fa fa-map-marker text-primary"></i> {{$tour->city?$tour->city.',':''}} Egypt</p>
-													</div>
-													<div class="content">
-														<div class="row gap-5">
-															<div class="col-xs-6 col-sm-6">
-																<div class="tripadvisor-module">
-																	<div class="texting">
-																		<div class="review_rating">
-																			<?php 
-																for($z=1;$z<=5;$z++){
-																	if ($tour->num_of_stars>=$z) {
-																						$m[$z]='';
-																				}else{
-																						$m[$z]='-o';
-																						}
-																					
-																	?>
-																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
-																	<?php } ?>
+												<div class="hotel-item-grid">
+											@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
+													<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}">
+											@else
+											<a href=""></a>
+											@endif
+														<div class="image">
+															<img src="{{ getImage(TOUR_PATH.$tour->img) }}" alt="{{ json_value($tour,'img_alt') }}" title="{{ json_value($tour,'img_title') }}" style="height: 200px;width: 100%">
+														</div>
+														<div class="heading">
+															<h4>  {{$tour->name}} </h4>
+															<p><i class="fa fa-map-marker text-primary"></i> {{$tour->city?$tour->city.',':''}} Egypt</p>
+														</div>
+														<div class="content">
+															<div class="row gap-5">
+																<div class="col-xs-6 col-sm-6">
+																	<div class="tripadvisor-module">
+																		<div class="texting">
+																			<div class="review_rating">
+																				<?php 
+																	for($z=1;$z<=5;$z++){
+																		if ($tour->num_of_stars>=$z) {
+																							$m[$z]='';
+																					}else{
+																							$m[$z]='-o';
+																							}
+																						
+																		?>
+																		<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																		<?php } ?>
+																			</div>
 																		</div>
+																		<div class="hover-underline">324 reviews</div>
 																	</div>
-																	<div class="hover-underline">324 reviews</div>
+																</div>
+																<div class="col-xs-6 col-sm-6">
+																	<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / night</p>
 																</div>
 															</div>
-															<div class="col-xs-6 col-sm-6">
-																<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / night</p>
-															</div>
 														</div>
-													</div>
-												</a>
+													</a>
+												</div>
+
 											</div>
-
-										</div>
-										@endforeach
-										@endforeach
-									</div>
-									
-								
-
-								</div>
-								<div class="hotel-item-list-wrapper mb-40" id="list_container" >
-									<div class="hotel-item-list-wrapper mb-40" >
-
-										@foreach($subs as $sub)
-										@foreach($sub->tours as $tour)
-										<div class="hotel-item-list">
-												<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$tour->img) }}');"></div>
-												<div class="content">
-													<div class="heading">
-														<h4>{{$tour->name}} </h4>
-														<p><i class="fa fa-map-marker text-primary"></i> Egypt, Pyramids</p>
-													</div>
-													<div class="short-info">
-														{{$tour->small_desc}}
-													</div>
-												</div>
-												<div class="absolute-bottom">
-													<p class="text-primary">
-														@if($tour->breakfast==1)
-														<i class="fa fa-check-circle"></i> Breakfast Included
-														@endif
-														@if($tour->wifi==1)
-														 <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p>
-														 @endif
-												</div>
-												<div class="absolute-right">
-													<div class="meta-option">
-														<a href="#" class="tripadvisor-module">
-															<div class="texting">
-																Very Good
-															</div>
-															<div class="review_rating">
-																<?php 
-																for($z=1;$z<=5;$z++){
-																	if ($tour->num_of_stars>=$z) {
-																						$m[$z]='';
-																				}else{
-																						$m[$z]='-o';
-																						}
-																					
-																	?>
-																	<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
-																	<?php } ?>
-															</div>
-														</a>
-													</div>
-													<div class="price-wrapper">
-														<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / night</span></p>
-														@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
-														<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">Details</a>
-														@endif
-													</div>
-												</div>
+											@endforeach
+											@endforeach
 										</div>
 										
-										@endforeach
-										@endforeach
-									</div>
-								</div>
-								
-
 									
 
-								
+									</div>
+									<div class="hotel-item-list-wrapper mb-40" id="list_container" >
+										<div class="hotel-item-list-wrapper mb-40" >
 
-								
+											@foreach($subs as $sub)
+											@foreach($sub->tours as $tour)
+											<div class="hotel-item-list">
+													<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$tour->img) }}');"></div>
+													<div class="content">
+														<div class="heading">
+															<h4>{{$tour->name}} </h4>
+															<p><i class="fa fa-map-marker text-primary"></i> Egypt, Pyramids</p>
+														</div>
+														<div class="short-info">
+															{{$tour->small_desc}}
+														</div>
+													</div>
+													<div class="absolute-bottom">
+														<p class="text-primary">
+															@if($tour->breakfast==1)
+															<i class="fa fa-check-circle"></i> Breakfast Included
+															@endif
+															@if($tour->wifi==1)
+															 <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p>
+															 @endif
+													</div>
+													<div class="absolute-right">
+														<div class="meta-option">
+															<a href="#" class="tripadvisor-module">
+																<div class="texting">
+																	Very Good
+																</div>
+																<div class="review_rating">
+																	<?php 
+																	for($z=1;$z<=5;$z++){
+																		if ($tour->num_of_stars>=$z) {
+																							$m[$z]='';
+																					}else{
+																							$m[$z]='-o';
+																							}
+																						
+																		?>
+																		<i class="fa fa-star{{$m[$z]}}" aria-hidden="true"></i>
+																		<?php } ?>
+																</div>
+															</a>
+														</div>
+														<div class="price-wrapper">
+															<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / night</span></p>
+															@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
+															<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">Details</a>
+															@endif
+														</div>
+													</div>
+											</div>
+											
+											@endforeach
+											@endforeach
+										</div>
+									</div>
+								</div>
 								<div class="mb-20"></div>
 
 							</div>

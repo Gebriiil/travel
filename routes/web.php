@@ -46,6 +46,7 @@ Route::group(
             // Route::get('/{categorySlug}/{subCategorySlug}/{tourSlug}', 'TourController@index')->name('get.tour.index');
             Route::post('/search-tour', 'SubCategoryController@searchTours');
             Route::get('/{category}/{subCategory}/{tour}', 'TourController@index');
+            Route::post('/search-ajax-tour', 'SubCategoryController@searchToursAjax');
 
 
 

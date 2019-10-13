@@ -68,6 +68,58 @@
                  </div>
              </div>
     </div>
+    <div class="col-sm-4">
+            <div class="form-group">
+                 <div class="input-group">
+                     <span class="input-group-addon input-circle-left">
+                         <i class="fa fa-text-width"></i>
+                     </span>
+                  
+                     <label>Destinations </label>
+                     <input type="text"  name="destinations" class="form-control input-circle-right count-text-desc-keywords"
+                     value="{{ site_content($siteContent,'destinations') }} "> 
+                 </div>
+             </div>
+    </div>    
+    <div class="col-sm-4">
+            <div class="form-group">
+                 <div class="input-group">
+                     <span class="input-group-addon input-circle-left">
+                         <i class="fa fa-text-width"></i>
+                     </span>
+                  
+                     <label>Filter </label>
+                     <input type="text"  name="filter" class="form-control input-circle-right count-text-desc-keywords"
+                     value="{{ site_content($siteContent,'filter') }} "> 
+                 </div>
+             </div>
+    </div>
+    <div class="col-sm-4">
+            <div class="form-group">
+                 <div class="input-group">
+                     <span class="input-group-addon input-circle-left">
+                         <i class="fa fa-text-width"></i>
+                     </span>
+                  
+                     <label>Star Rating </label>
+                     <input type="text"  name="star" class="form-control input-circle-right count-text-desc-keywords"
+                     value="{{ site_content($siteContent,'star') }} "> 
+                 </div>
+             </div>
+    </div>
+    <div class="col-sm-4">
+            <div class="form-group">
+                 <div class="input-group">
+                     <span class="input-group-addon input-circle-left">
+                         <i class="fa fa-text-width"></i>
+                     </span>
+                  
+                     <label>Destination </label>
+                     <input type="text"  name="destination" class="form-control input-circle-right count-text-desc-keywords"
+                     value="{{ site_content($siteContent,'destination') }} "> 
+                 </div>
+             </div>
+    </div>
     
     
     

@@ -212,6 +212,18 @@ class SubCategoryController extends ParentController
         }
         return view('front2.pages.tour.search_results',compact('tours'));
     }
+    public function searchToursAjax(Request $request)
+    {
+        $city=City::where('name',$request->destination)->first();
+        if (isset($city)) {
+                foreach($city->country->category as $cat){
+                    foreach($cat->sub as $sub){
+                         $tours=$sub->tours->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to);
+                    }
+                } 
+        }
+        return view('front2.pages.tour.ajax',compact('tours'));
+    }
 }
 
 

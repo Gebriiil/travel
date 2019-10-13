@@ -37,5 +37,9 @@ class SubCategory extends Model
     {
     	    return $this->hasMany(Tour::class);
     }
+    public function tags()
+    {
+            return $this->belongsToMany(Tag::class,'sub_category_tags');
+    }
 
 }

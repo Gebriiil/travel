@@ -22,7 +22,7 @@
 											<div class="slick-hero-slider-caption">
 												<h2 class="animation fromBottom transitionDelay2 transitionDuration4">{{ $slider->title }}</h2>
 												<p class="animation fromBottom transitionDelay4 transitionDuration6">{{ $slider->desc }}</p>
-												<a href="#" class="animation fromBottom transitionDelay6 transitionDuration8"><span class="bg-primary">More Details</span></a>
+												<a href="#" class="animation fromBottom transitionDelay6 transitionDuration8"><span class="bg-primary">{{ site_content($site_content,'discover') }}</span></a> 
 											</div>
 											
 										</div>
@@ -54,7 +54,7 @@
 
 								<div class="typeahead-container form-group form-icon-right">
 
-									<label class="destination-search-3">Destination</label>
+									<label class="destination-search-3">{{ site_content($site_content,'top_destinations') }}</label>
 
 									<div class="typeahead-field">
 										<input id="destination-search-3"  type="search" autocomplete="off" class="form-control" placeholder="City or Airport" name="destination">
@@ -70,7 +70,7 @@
 
 									<div class="col-xss-12 col-xs-6 col-sm-6">
 										<div class="form-group form-icon-right">
-											<label for="dpd1">Price-start</label>
+											<label for="dpd1">{{ site_content($site_content,'from') }}:</label>
 											<input  name="from" type="number" autocomplete="off" class="form-control" placeholder="Price-start">
 											<i class="fa fa-money"></i>
 										</div>
@@ -78,7 +78,7 @@
 
 									<div class="col-xss-12 col-xs-6 col-sm-6">
 										<div class="form-group form-icon-right">
-											<label for="dpd2">Price-end</label>
+											<label for="dpd2">{{ site_content($site_content,'to') }}:</label>
 											<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end">
 											<i class="fa fa-money"></i>
 										</div>
@@ -108,7 +108,7 @@
 
 						<div class="btn-absolute">
 
-							<button type="submit" class="btn btn-block btn-danger">Search</button>
+							<button type="submit" class="btn btn-block btn-danger">{{ site_content($site_content,'search') }}</button>
 
 						</div>
 
@@ -344,8 +344,8 @@
 						<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 
 							<div class="section-title">
-								<h2>WHAT OUR CLIENTS SAY</h2>
-								<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae</p>
+								<h2>{{ site_content($site_content,'client_say') }}</h2>
+								<p>{{ site_content($site_content,'client_desc') }}</p>
 							</div>
 
 						</div>
@@ -363,74 +363,34 @@
 
 
 								<div class="slider gallery-nav slick-testimonial-nav alt">
+									@foreach($clients as $client)
 									<div class="slick-item">
 										<div class="testimonial-man">
 											<div class="image">
-												<img src="images/clients/01.jpg" alt="image"/>
+												<img src="{{ getImage(REVIEW_PATH.$client->img) }}" alt="image"/>
 											</div>
 										</div>
 									</div>
-									<div class="slick-item">
-										<div class="testimonial-man">
-											<div class="image">
-												<img src="images/clients/02.jpg" alt="image"/>
-											</div>
-										</div>
-									</div>
-									<div class="slick-item">
-										<div class="testimonial-man">
-											<div class="image">
-												<img src="images/clients/03.jpg" alt="image"/>
-											</div>
-										</div>
-									</div>
+									@endforeach
 								</div>
 								<div class="clear"></div>
 								<div class="slider gallery-slideshow slick-testimonial">
-
+									@foreach($clients as $client)
 									<div class="slick-item">
 
 										<div class="testimonial-long">
 
 											<p class="saying">
-												If we landlord stanhill mr whatever pleasure supplied concerns so. Exquisite by it admitting cordially september newspaper an. Acceptance middletons am it favourable. It it oh happen lovers afraid.
+												{{$client->desc}}
 											</p>
 
-											<h4 class="uppercase text-primary">Frank Abagnale</h4>
+											<h4 class="uppercase text-primary">{{$client->name}}</h4>
 
 										</div>
 
 									</div>
-
-									<div class="slick-item">
-
-										<div class="testimonial-long">
-
-											<p class="saying">
-												Sympathize did now preference unpleasing mrs few. Mrs for hour game room want are fond dare. For detract charmed add talking age.
-											</p>
-
-											<h4 class="uppercase text-primary">Charles Ponzi</h4>
-
-										</div>
-
-									</div>
-
-									<div class="slick-item">
-
-										<div class="testimonial-long">
-
-											<p class="saying">
-												Who connection imprudence middletons too but increasing celebrated principles joy. Herself too improve gay winding ask expense are compact.
-											</p>
-
-											<h4 class="uppercase text-primary">Joseph Weil</h4>
-
-										</div>
-
-									</div>
-
-
+									@endforeach
+									
 								</div>
 								<div class="clear mb-5"></div>
 
@@ -457,8 +417,8 @@
 
 						<div class="GridLex-col-6_sm-12_xs-12 pt-0 pb-0">
 							<div class="text-holder">
-								<h3>Sign up for Newsletter</h3>
-								<p>Sign up to get our latest exclusive updates, deals, offers and promotions</p>
+								<h3>{{ site_content($site_content,'subscribe_title') }}</h3>
+								<p>{{ site_content($site_content,'subscribe_desc') }}</p>
 							</div>
 						</div>
 
@@ -472,7 +432,7 @@
 								</div>
 
 								<div class="col-xss-12 col-xs-4 col-sm-4 mt-10-xss" id="newsletter-submit">
-									<input  class="btn btn-block btn-danger" value="Submit"  >
+									<input  class="btn btn-block btn-danger" value=">{{ site_content($site_content,'subscribe_btn') }}"  >
 								</div>
 
 							</form>

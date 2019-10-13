@@ -190,6 +190,16 @@
 
                                 </div>
                            </div>
+                           <div class="col-sm-12">
+                               <div class="form-group">
+                                    <label> @lang('site.description') </label>
+
+                                        <select name="tags[]" class="form-control select2" multiple="multiple">
+                                            <option>tt</option>
+                                        </select>
+
+                                </div>
+                           </div>
 
 
                            <div class="col-sm-12">

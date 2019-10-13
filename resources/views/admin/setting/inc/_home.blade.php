@@ -343,6 +343,19 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+             
+                <label>Subscribe Desc </label>
+                <input type="text"  name="subscribe_desc" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'subscribe_desc') }} "> 
+            </div>
+        </div>
+    </div>
     
 
     <div class="col-sm-4">
@@ -368,6 +381,30 @@
                 <label>Contact Us </label>
                 <input type="text"  name="contact_us" class="form-control input-circle-right count-text-desc-keywords"
                 value="{{ site_content($siteContent,'contact_us') }} "> 
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+                <label>WHAT OUR CLIENTS SAY</label>
+                <input type="text"  name="client_say" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'client_say')?site_content($siteContent,'client_say'):'' }} "> 
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+                <label>CLIENTS SAY Description</label>
+                <input type="text"  name="client_desc" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'client_desc')?site_content($siteContent,'client_desc'):'' }} "> 
             </div>
         </div>
     </div>
