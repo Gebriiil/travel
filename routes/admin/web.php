@@ -99,9 +99,13 @@ function()
             Route::get('/seo/{id}','SubCategoryController@seo')->name('get.subCategory.seo')->where('id', '[0-9]+');
             // update data of seo
             Route::post('/seo/update','SubCategoryController@updateSeo')->name('post.subCategory.updateSeo');
-            Route::get('/add-tags','SubCategoryController@add_tags');
+            Route::get('/add-tags','SubCategoryController@add_tags')->name('post.subcategory.addtag');
             Route::post('/add/tag','SubCategoryController@store_tags')->name('post.subcategory.tag');
             Route::get('/tags','SubCategoryController@tags')->name('post.subcategory.tags');
+            Route::get('/edit/tags/{id}','SubCategoryController@edit_tag')->name('get.subcategory.tags.edit');
+            Route::post('/update/tags/{id}','SubCategoryController@update_tag')->name('post.subcategory.tags.update');
+            Route::get('/delete/tags/{id}','SubCategoryController@delete_tag')->name('get.subcategory.tags.delete');
+            Route::post('/delete/tags','SubCategoryController@deleteMultiTags')->name('post.subcategory.tag.deleteMulti');
 
 
         });

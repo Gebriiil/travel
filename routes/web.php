@@ -31,7 +31,14 @@ Route::group(
             Route::get('/search-tours', 'TourController@search')->name('get.tours.search');
 
             Route::get('/sub-categories', 'CategoryController@childs')->name('ajax.get.subCategories');
-            Route::get('/', 'HomeController@index')->name('get.home.index');
+            Route::get('/', function(){
+                
+        
+        $tours=\App\Models\Tour::whereHas('tags', function ($query) {
+        $query->whereIn('tags.id',[3]);
+    })->get();
+        return $tours;
+            })->name('get.home.index');
             Route::get('/about', 'AboutUsController@index')->name('get.about.index');
             Route::get('/contact', 'ContactUsController@index')->name('get.contact.index');
             Route::get('/search', 'SubCategoryController@searchTours')->name('get.search.tours');
@@ -47,6 +54,7 @@ Route::group(
             Route::post('/search-tour', 'SubCategoryController@searchTours');
             Route::get('/{category}/{subCategory}/{tour}', 'TourController@index');
             Route::post('/search-ajax-tour', 'SubCategoryController@searchToursAjax');
+            Route::post('/filter-ajax-tour', 'SubCategoryController@amenitiesToursAjax');
 
 
 

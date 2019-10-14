@@ -107,7 +107,7 @@ if (!function_exists('printSelect'))
 
 //  show options according view page ( edit , delete , status)
 
-if (!function_exists('show_potions'))
+if (!function_exists('show_options'))
 {
     function show_potions($route,$id,$status=null)
     {

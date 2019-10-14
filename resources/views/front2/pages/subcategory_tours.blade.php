@@ -142,69 +142,19 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> 
 
 										<div class="another-toggle filter-toggle">
 											<h4 class="active">Amenities</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
+													@foreach($tags as $tag)
 													<div class="checkbox-block font-icon-checkbox">
-														<input id="filter_amenities-1" name="filter_amenities" type="checkbox" class="checkbox" checked="checked" />
-														<label class="" for="filter_amenities-1">Any</label>
+														<input id="filter_amenities-1" name="filter_amenities[]" type="checkbox" class="checkbox" checked="checked" value="{{$tag->id}}" id="filter_amenities" />
+														<label class="" for="filter_amenities-1">{{$tag->name}}</label>
 													</div>
-													<div class="checkbox-block font-icon-checkbox">
-														<input id="filter_amenities-2" name="filter_amenities" type="checkbox" class="checkbox"/>
-														<label class="" for="filter_amenities-2">Shared outdoor pool</label>
-													</div>
-													<div class="checkbox-block font-icon-checkbox">
-														<input id="filter_amenities-3" name="filter_amenities" type="checkbox" class="checkbox"/>
-														<label class="" for="filter_amenities-3">Hot tub/Jacuzzi</label>
-													</div>
-													<div class="checkbox-block font-icon-checkbox">
-														<input id="filter_amenities-4" name="filter_amenities" type="checkbox" class="checkbox"/>
-														<label class="" for="filter_amenities-4">Satellite or cable TV</label>
-													</div>
-													<div class="checkbox-block font-icon-checkbox">
-														<input id="filter_amenities-5" name="filter_amenities" type="checkbox" class="checkbox"/>
-														<label class="" for="filter_amenities-5">Parking</label>
-													</div>
-													<div id="amenities-more-less" class="collapse">
-														<div class="inner">
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-6" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-6">A/C or climate control</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-7" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-7">Smoking allowed</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-8" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-8">Microwave</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-9" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-9">Dishwasher</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-10" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-10">Refrigerator</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-11" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-11">Grill</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-12" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-12">Patio / Balcony</label>
-															</div>
-															<div class="checkbox-block font-icon-checkbox">
-																<input id="filter_amenities-13" name="filter_amenities" type="checkbox" class="checkbox"/>
-																<label class="" for="filter_amenities-13">Fitness Room</label>
-															</div>
-														</div>
-													</div>
-													<button class="btn btn-more-less" data-toggle="collapse" data-target="#amenities-more-less">Show more</button>
+													@endforeach
+													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="tags-filter-tours-btn">Show</button>
 												</div>
 											</div>
 										</div>

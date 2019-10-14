@@ -47,6 +47,11 @@ class Tour extends Model
         return $this->belongsTo(city::class);
     }
 
+    public function tags()
+    {
+            return $this->belongsToMany(Tag::class,'tour_tags');
+    }
+
 
 
 }

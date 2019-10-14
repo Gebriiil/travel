@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\ParentController;
 
 Use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends ParentController
@@ -21,8 +22,8 @@ class CategoryController extends ParentController
             {
                 $data['row'] = $category;
                 $subs=$category->sub;
-                
-                return view('front2.pages.subcategory_tours',compact('category','subs'));
+                $tags=Tag::all();
+                return view('front2.pages.subcategory_tours',compact('category','subs','tags'));
             }
         }
         return redirect(url('/'));

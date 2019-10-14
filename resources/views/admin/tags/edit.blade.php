@@ -20,7 +20,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>@lang('site.add')</span>
+                <span>@lang('site.edit')</span>
             </li>
         </ul>
 
@@ -33,7 +33,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="note note-info">
-        <h3> @lang('site.addItem') ( @lang('site.tags') ) </h3>
+        <h3> @lang('site.editItem') ( @lang('site.tags') ) </h3>
     </div>
 
 
@@ -46,12 +46,12 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-settings font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase"> @lang('site.addItem') </span>
+                        <span class="caption-subject bold uppercase"> @lang('site.editItem') </span>
                     </div>
                 </div>
 
                 <div class="portlet-body form">
-                    <form role="form" action="{{route('admin.post.subcategory.tag')}}" method="POST" 
+                    <form role="form" action="{{route('admin.post.subcategory.tags.update',$tag->id)}}" method="POST" 
                           enctype="multipart/form-data" >
                           @csrf
                           <img src="{{ aurl() }}/images/giphy.gif" style="display: none" id="coverloading" >
@@ -68,7 +68,7 @@
                                                         <i class="fa fa-text-width"></i>
                                                     </span>
                                                     <input type="text" name="name" class="form-control input-circle-right "
-                                                           placeholder="Name" required value="{{ old('name') }}"></div>
+                                                           placeholder="Name" required value="{{ $tag->name }}"></div>
                                             </div>
                                         </div>
             
@@ -82,7 +82,7 @@
                                                         <i class="fa fa-text-width"></i>
                                                     </span>
                                                     <input type="text" name="desc" class="form-control input-circle-right "
-                                                           placeholder="Name" required value="{{ old('desc') }}"></div>
+                                                           placeholder="Name" required value="{{$tag->desc}}"></div>
                                             </div>
                                         </div>
             
@@ -100,13 +100,13 @@
                                             <i class="fa fa-image"></i>
                                         </span>
                                         <input type="file" name="image" accept="image/*" onchange="loadFile(event)"
-                                               class="form-control input-circle-right" required></div>
+                                               class="form-control input-circle-right" ></div>
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <img id="output" class="privew-image"/>
+                                    <img id="output" @if($tag->image) src="  {{ getImage(SUBCATEGORY_PATH.$tag->image) }}" @endif class="privew-image"/>
                                 </div>
                             </div>
                             </div>
@@ -119,7 +119,7 @@
                                                         <i class="fa fa-text-width"></i>
                                                     </span>
                                                     <input type="text" name="seo" class="form-control input-circle-right "
-                                                           placeholder="Name" required value="{{ old('seo') }}"></div>
+                                                           placeholder="Seo"  value="{{$tag->seo}}" required></div>
                                             </div>
                                         </div>
             

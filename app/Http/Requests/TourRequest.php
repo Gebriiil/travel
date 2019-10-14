@@ -38,6 +38,7 @@ class TourRequest extends FormRequest
                     "num_of_days" => "required|integer|min:1",
                     "price_start_from" => "required|regex:/^\d*(\.\d{1,2})?$/",
                     'inclusion' => 'required|string|max:30000',
+                    'city' => 'required|string|max:30000',
                     'exclusion' => 'required|string|max:30000',
                     'num_of_stars' => 'required|integer|min:1|max:7',
                     'slug' => 'nullable|string|unique:tours,slug',

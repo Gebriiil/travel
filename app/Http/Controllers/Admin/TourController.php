@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TourRequest;
 use App\Models\Category;
 use App\Models\Tour;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,6 +32,7 @@ class TourController extends Controller
     {
 
         $data['categories'] = Category::where('language_id', language())->get();
+        $data['tags'] = Tag::all();
         return view('admin.tour.add')->with($data);
     }
 
@@ -57,7 +59,7 @@ class TourController extends Controller
         }
 
 
-        if ($request->has('slug') && $request->slug != null) {
+        if ($request->has('slug') && $request->slug != null) { 
             $data['slug'] = str_slug($request->slug);
         } else {
             $data['slug'] = str_slug($request->name);
@@ -65,6 +67,7 @@ class TourController extends Controller
 
 
         $tour = Tour::create($data); // inserting data
+        $tour->tags()->sync($request->tags);
         session()->flash('message', trans('site.added_success'));
         if (isset($request->save_and_continue)) {
             return redirect(route('admin.get.tour.itinerary.addItineraries', $tour->id));

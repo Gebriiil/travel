@@ -18,6 +18,7 @@ class CreateTagsTable extends Migration
             $table->text('name');
             $table->longText('desc')->nullable();
             $table->longText('image')->nullable();
+            $table->text('seo')->nullable();
             $table->timestamps();
         });
     }

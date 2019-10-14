@@ -215,14 +215,22 @@ class SubCategoryController extends ParentController
     public function searchToursAjax(Request $request)
     {
         $city=City::where('name',$request->destination)->first();
-        if (isset($city)) {
-                foreach($city->country->category as $cat){
-                    foreach($cat->sub as $sub){
-                         $tours=$sub->tours->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to);
-                    }
-                } 
-        }
+                         $tours=Tour::where('city','cairo')->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to)->get();
         return view('front2.pages.tour.ajax',compact('tours'));
+    }
+    public function amenitiesToursAjax(Request $request,$tags=null,$sub_id)
+    {
+
+      //  $tours=Tour::whereHas('tags', function ($query) use($request) {
+      //   $query->whereIn('tags.id',$request->tags);
+      // })->get();
+      //   return $tours;
+        return '';
+    //     $tours=Tour::whereHas('tags', function ($query) {
+    //     $query->whereIn('tags.id',[3]);
+    // })->get();
+    //     return $tours;
+    //     return view('front2.pages.tour.ajax',compact('tours'));
     }
 }
 

@@ -44,6 +44,7 @@ class SubCategoryController extends Controller
             ->where('language_id', adminAuth()->user()->language_id)
             ->orderBy('sort')
             ->get();
+        $data['tags']=Tag::all();
         return view('admin.subCategory.add')->with($data);
     }
 
@@ -77,7 +78,8 @@ class SubCategoryController extends Controller
 
 
         // inserting data in db
-        SubCategory::create($data);
+        $sub=SubCategory::create($data);
+        $sub->tags()->sync($request->tags);
 
         session()->flash('message', trans('site.added_success'));
         return redirect(route('admin.get.subCategory.index'));
@@ -247,6 +249,45 @@ class SubCategoryController extends Controller
             }
         $tag = Tag::create($data);
         session()->flash('message', trans('site.sorted_success'));
+        return back();
+    }
+    // Edit
+    public function edit_tag($id)
+    {
+        $tag=Tag::find($id);
+        return view('admin.tags.edit',compact('tag'));
+    }
+    public function update_tag(Request $request,$id)
+    {
+        $data = $request->except('_token','image');
+        $tag=Tag::find($id);
+        // updating data in db
+        if ($request->hasFile('image')) {
+            if ($tag->image) {
+                Storage::disk('public_uploads')->delete(SUBCATEGORY_PATH . $tag->image);
+            }
+            $img = UploadClass::uploadFile($request, 'image', UPLOADS_PATH . SUBCATEGORY_PATH, $all = true,1100,600,1500,800);
+            $data['image'] = $img;
+            }
+        $tag->update($data);
+        session()->flash('message', trans('site.sorted_success'));
+        return back();
+    }
+    public function delete_tag(Request $request,$id)
+    {
+        $tag=Tag::findOrFail($id)->delete();
+
+        return redirect()->route('admin.post.subcategory.tags');
+    }
+    // delete mutli row from table
+    public function deleteMultiTags(Request $request)
+    {
+        foreach ($request->deleteMulti as $value) {
+            Tag::findOrFail($value)->delete();
+
+        }
+
+        session()->flash('message', trans('site.deleted_success'));
         return back();
     }
 

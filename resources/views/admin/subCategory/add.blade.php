@@ -192,10 +192,12 @@
                            </div>
                            <div class="col-sm-12">
                                <div class="form-group">
-                                    <label> @lang('site.description') </label>
+                                    <label> @lang('site.tags') </label>
 
                                         <select name="tags[]" class="form-control select2" multiple="multiple">
-                                            <option>tt</option>
+                                            @foreach($tags as $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
                                         </select>
 
                                 </div>

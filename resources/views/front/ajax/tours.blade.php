@@ -89,6 +89,7 @@
                         success: function (data) {
                             $('#tours-containers-ajax').html(data);
                             showGrid();
+                            console.log(data);
                         }, error: function (xhr,status,data) {
                             
                                 //$('#error-msg').html("<h3 style='word-wrap:break-spaces;display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> " + item + "</h3>"); 
@@ -112,6 +113,52 @@
                     });
             }
 
+            
+        });
+
+        $('#tags-filter-tours-btn').on('click', function (e) {
+
+            let tags = [];
+            $('input[name="filter_amenities[]"]').each(function(){
+                tags.push($(this).val())
+            });
+            console.log(tags);
+                $.ajax({
+                        type: "POST",
+                        accept: 'application/json',
+                        url: "{{murl('filter-ajax-tour')}}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            'tags': tags,
+                        }
+                        ,
+                        dataType: 'html',
+                        cache: false,
+                        success: function (data) {
+                            $('#tours-containers-ajax').html(data);
+                            showGrid();
+                            console.log(data);
+                        }, error: function (xhr,status,data) {
+                            
+                                //$('#error-msg').html("<h3 style='word-wrap:break-spaces;display: block;text-align: center'  class='btn btn-danger'><i class='fa fa-info'></i> " + item + "</h3>"); 
+                                // $("#booking-error-msg").append("<li class='alert alert-danger show-errors'>"+item+"</li>")
+                                // var errorsMsg;
+                                // $.each(xhr.responseJSON.errors, function (key, item){
+                                //     errorsMsg += item+'<br/>';
+                                    
+                                // });
+                            // Swal.fire({
+                            //     title: '{{trans("site.email_error")}}',
+                            //     html: "errorsMsg",
+                            //     type: 'error',
+                            //      showCancelButton: false,
+                            //     confirmButtonColor: '#3085d6',
+                            //      confirmButtonText: '{{trans("site.ok")}}'
+                            //  });
+                            
+
+                        }
+                    });
             
         });
         

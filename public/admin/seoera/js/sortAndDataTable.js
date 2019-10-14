@@ -33,14 +33,14 @@ $(".table-sort").find('.droppable-area1').change(function () {
         }
     });
 });
-$("#sample_tags").find('.group-checkable').change(function () {
-    var set = jQuery(this).attr("data-set");
-    var checked = jQuery(this).is(":checked");
-    jQuery(set).each(function () {
-        if (checked) {
-            $(this).prop("checked", true);
-        } else {
-            $(this).prop("checked", false);
-        }
-    });
-});
+// $("#sample_tags").find('.group-checkable').change(function () {
+//     var set = jQuery(this).attr("data-set");
+//     var checked = jQuery(this).is(":checked");
+//     jQuery(set).each(function () {
+//         if (checked) {
+//             $(this).prop("checked", true);
+//         } else {
+//             $(this).prop("checked", false);
+//         }
+//     });
+// });

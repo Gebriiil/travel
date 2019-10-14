@@ -40,7 +40,7 @@
 
 <!-- END PAGE HEADER-->
 <div class="note note-info">
-    <h3> @lang('site.view') ( @lang('site.tours') ) </h3>
+    <h3> @lang('site.view') ( @lang('site.tags') ) </h3>
 </div>
 
 
@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a id="sample_editable_1_new" href="{{ route('admin.get.tour.add') }}" class="btn sbold green"> @lang('site.add')
+                                <a id="sample_editable_1_new" href="{{ route('admin.post.subcategory.addtag') }}" class="btn sbold green"> @lang('site.add')
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -89,10 +89,10 @@
 
 
                 @if($tags->count())
-               <form action="#" method="post" id="Form2"> @csrf </form>
-               <form action="{{ route('admin.post.tour.sort') }}" method="post" id="sortForm">@csrf</form>
+               <form action="{{ route('admin.post.subcategory.tag.deleteMulti') }}" method="post" id="Form2"> @csrf </form>
+               <form action="{{ route('admin.post.subcategory.tag') }}" method="post" id="sortForm">@csrf</form>
                     
-                        <table class="table table-striped table-bordered table-hover table-checkable table-sort order-column column" id="sample_tags">
+                    <table class="table table-striped table-bordered table-hover table-checkable table-sort order-column column" id="sample_tags">
                         <thead>
                             <tr>
                                 <th>
@@ -102,10 +102,7 @@
                                     </label>
                                 </th>
                                 <th> @lang('site.name') </th>
-                                <th> @lang('site.image') </th>
-                                <th> @lang('site.subcategories') </th>
-                                
-
+                                <th> @lang('site.actions') </th>
                             </tr>
                         </thead>
                         <tbody class="connected-sortable droppable-area1">
@@ -120,38 +117,16 @@
                                     </label>
                                 </td>
                                 <td class="text-center"> {{ $tag->name }} </td>
-                                <td class="text-center"> <a href="{{route('admin.get.tour.image.addImages',$tag->id)}}"><h1><i class="fa fa-image"></i></h1></a> </td>
-                                <td class="text-center"> <a href="{{route('admin.get.tour.itinerary.addItineraries',$tag->id)}}"><h1><i class="fa fa-print"></i></h1></a> </td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> @lang('site.actions')
                                             <i class="fa fa-angle-down"></i>
                                         </button>
-                                        <!-- <ul class="dropdown-menu pull-left" role="menu">
-
-                                            
-
-                                            
-                                                <li>
-                                                    <a href=""
-                                                       class="confirm-show">
-                                                        <i class="fa fa-eye"></i> Show In Offers </a>
-                                                </li>
-                                           
-                                                <li>
-                                                    <a href=""
-                                                       class="confirm-hide">
-                                                        <i class="fa fa-eye"></i> Hide From Offers </a>
-                                                </li>
-                                           
-
-
-                                        </ul> -->
+                                        <ul class="dropdown-menu pull-left" role="menu">
+                                            {!!show_potions('subcategory.tags',$tag->id)!!}
+                                        </ul>
                                     </div>
                                 </td>
-                                <td class="text-center">  
-                                  <a href="{{ route('admin.get.tour.seo',$tag->id) }}" class="btn btn-sm btn-primary"> @lang('site.seo') </a>
-                                </td>
-
                             </tr>
                             @endforeach
 
