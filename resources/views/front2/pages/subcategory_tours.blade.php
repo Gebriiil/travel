@@ -1,6 +1,6 @@
 @extends('front2.master')
 @section('content')
-	@if(isset($subs))
+	@if(isset($subs)) 
 		<div class="not-home">
 			<!-- start Main Wrapper -->
 			<div class="main-wrapper">
@@ -33,7 +33,7 @@
 								<aside>
 									<div class="result-search-form-wrapper clearfix">
 
-										<h3>Search Your Trip</h3>
+										<h3>{{ site_content($site_content,'Search_Your_Trip') }}</h3>
 										<div class="price">
 											<span id="booking-error-msg-sub"></span>
 										</div>
@@ -104,13 +104,13 @@
 												<div class="clear"></div>
 
 												<div class="col-sm-12">
-													<button class="btn btn-block btn-primary btn-icon mt-5" id="search-subpage">Search <span class="icon"><i class="fa fa-search"></i></span></button>
+													<button class="btn btn-block btn-primary btn-icon mt-5" id="search-subpage">{{ site_content($site_content,'search') }} <span class="icon"><i class="fa fa-search"></i></span></button>
 												</div>
 
 												<div class="clear mb-10"></div>
 
-												<div class="tooltip-light">
-													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div>
+												<!-- <div class="tooltip-light">
+													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div> -->
 
 												<div class="clear"></div>
 
@@ -145,7 +145,7 @@
 										</div> 
 
 										<div class="another-toggle filter-toggle">
-											<h4 class="active">Amenities</h4>
+											<h4 class="active">{{ site_content($site_content,'amenities') }}</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
 													@foreach($tags as $tag)
@@ -154,12 +154,12 @@
 														<label class="" for="filter_amenities-1">{{$tag->name}}</label>
 													</div>
 													@endforeach
-													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="tags-filter-tours-btn">Show</button>
+													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="tags-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
 												</div>
 											</div>
 										</div>
 
-										<div class="another-toggle filter-toggle">
+										<!-- <div class="another-toggle filter-toggle">
 											<h4 class="active">Room Facility</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
@@ -249,7 +249,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 
 
 									</div>
@@ -260,8 +260,8 @@
 
 								<div class="result-status">
 
-									<p>found <span class="text-primary font700">256</span> Tours with availability in <span class="text-primary font700">Paris</span>. Showing 1 - 30</p>
-
+									<!-- <p>found <span class="text-primary font700">256</span> Tours with availability in <span class="text-primary font700">Paris</span>. Showing 1 - 30</p>
+ -->
 
 								</div>
 
@@ -269,7 +269,7 @@
 
 									<ul class="clearfix">
 
-										<li class="text">Sort by: </li>
+										<!-- <li class="text">Sort by: </li>
 										<li class="active"><a href="#">Price <i class="fa fa-long-arrow-up"></i></a></li>
 										<li><a href="#">Name</a></li>
 										<li><a href="#">Rating</a></li>
@@ -280,7 +280,7 @@
 												<li><a >Downtown</a></li>
 												<li><a >City </a></li>
 											</ul>
-										</li>
+										</li> -->
 										<li class="list-grid active" id="list_btn"><a ><i class="fa fa-align-justify"></i></a></li>
 										<li class="list-grid" id="grid_btn"><a ><i class="fa fa-th-large"></i></a></li>
 									</ul>
@@ -326,11 +326,11 @@
 																		<?php } ?>
 																			</div>
 																		</div>
-																		<div class="hover-underline">324 reviews</div>
+																		<div class="hover-underline">324 {{ site_content($site_content,'reviews') }}</div>
 																	</div>
 																</div>
 																<div class="col-xs-6 col-sm-6">
-																	<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / night</p>
+																	<p class="price"><span class="block">{{ site_content($site_content,'start_from') }}</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / {{ site_content($site_content,'night') }}</p>
 																</div>
 															</div>
 														</div>
@@ -355,7 +355,7 @@
 													<div class="content">
 														<div class="heading">
 															<h4>{{$tour->name}} </h4>
-															<p><i class="fa fa-map-marker text-primary"></i> Egypt, Pyramids</p>
+															<p><i class="fa fa-map-marker text-primary"></i> Egypt, {{$tour->name}}</p>
 														</div>
 														<div class="short-info">
 															{{$tour->small_desc}}
@@ -374,7 +374,7 @@
 														<div class="meta-option">
 															<a href="#" class="tripadvisor-module">
 																<div class="texting">
-																	Very Good
+																	{{ site_content($site_content,'very_good') }}
 																</div>
 																<div class="review_rating">
 																	<?php 
@@ -392,9 +392,9 @@
 															</a>
 														</div>
 														<div class="price-wrapper">
-															<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / night</span></p>
+															<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / {{ site_content($site_content,'night') }}</span></p>
 															@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
-															<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">Details</a>
+															<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">{{ site_content($site_content,'Details') }}</a>
 															@endif
 														</div>
 													</div>
@@ -425,9 +425,9 @@
 
 							<div class="col-xs-12 col-sm-8">
 								<ol class="breadcrumb">
-									<li><a href="#">Home</a></li>
-									<li><a href="#">Destinations</a></li>
-									<li class="active">Destination</li>
+									<li><a href="#">{{ site_content($site_content,'home') }}</a></li>
+									<li><a href="#">{{ site_content($site_content,'destinations') }}</a></li>
+									<li class="active">{{ site_content($site_content,'destination') }}</li>
 								</ol>
 							</div>
 
@@ -445,81 +445,42 @@
 								<aside>
 									<div class="result-search-form-wrapper clearfix">
 
-										<h3>Search Your Trip</h3>
+										<h3>{{ site_content($site_content,'Search_Your_Trip') }}</h3>
 										<div class="inner">
 											<form class="gap-10">
 												<div class="col-xs-12 col-sm-12">
 													<div class="form-group form-icon-right mb-10">
-														<label> Destination ?</label>
+														<label> {{ site_content($site_content,'destination') }} ?</label>
 														<input type="text" class="form-control mb-0" placeholder="City or Airport" >
 														<i class="fa fa-map-marker"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-in</label>
+														<label>{{ site_content($site_content,'destination') }}Check-in</label>
 														<input name="arrival_date" class="form-control mb-0" id="dpd1" placeholder="Check-in" type="text">
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
-														<label>Check-out</label>
+														<label>{{ site_content($site_content,'destination') }}Check-out</label>
 														<input name="departure_date" class="form-control mb-0" id="dpd2" placeholder="Check-out" type="text">
 														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
-												<div class="col-xs-12 col-sm-4">
-													<div class="form-group">
-														<label>Rooms</label>
-
-														<select class="custom-select" id="change-search-room">
-															<option value="0">Room</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4‎</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xs-6 col-sm-4">
-													<div class="form-group">
-														<label>Adults</label>
-														<select class="custom-select" id="change-search-adult">
-															<option value="0">Adult</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4‎</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xs-6 col-sm-4">
-													<div class="form-group">
-														<label>Children</label>
-														<select class="custom-select" id="change-search-child">
-															<option value="0">Child</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4‎</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-												</div>
+												
 
 												<div class="clear"></div>
 
 												<div class="col-sm-12">
-													<button class="btn btn-block btn-primary btn-icon mt-5">Search <span class="icon"><i class="fa fa-search"></i></span></button>
+													<button class="btn btn-block btn-primary btn-icon mt-5">{{ site_content($site_content,'search') }} <span class="icon"><i class="fa fa-search"></i></span></button>
 												</div>
 
 												<div class="clear mb-10"></div>
 
-												<div class="tooltip-light">
-													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div>
+												<!-- <div class="tooltip-light">
+													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div> -->
 
 												<div class="clear"></div>
 

@@ -33,31 +33,34 @@
 								<aside>
 									<div class="result-search-form-wrapper clearfix">
 
-										<h3>Search Your Trip</h3>
+										<h3>{{ site_content($site_content,'Search_Your_Trip') }}</h3>
+										<div class="price">
+											<span id="booking-error-msg-sub"></span>
+										</div>
 										<div class="inner">
-											<form class="gap-10">
+											<div class="gap-10">
 												<div class="col-xs-12 col-sm-12">
 													<div class="form-group form-icon-right mb-10">
-														<label> {{ site_content($siteContent,'destination') }} ?</label>
-														<input type="text" class="form-control mb-0" placeholder="City or Airport" >
+														<label> {{ site_content($site_content,'destination') }} ?</label>
+														<input type="text" class="form-control mb-0" placeholder="City or Airport" id="destination-in-subpage">
 														<i class="fa fa-map-marker"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
 														<label>{{ site_content($site_content,'from') }}</label>
-														<input name="arrival_date" class="form-control mb-0" id="dpd1" placeholder="Check-in" type="text">
-														<i class="fa fa-calendar"></i>
+														<input  name="from" type="number" autocomplete="off" class="form-control" placeholder="Price-start" id="from-in-subpage">
+														<i class="fa fa-money"></i>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
 													<div class="form-group form-icon-right mb-10">
 														<label>{{ site_content($site_content,'to') }}</label>
-														<input name="departure_date" class="form-control mb-0" id="dpd2" placeholder="Check-out" type="text">
-														<i class="fa fa-calendar"></i>
+														<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end" id="to-in-subpage">
+														<i class="fa fa-money"></i>
 													</div>
 												</div>
-												<div class="col-xs-12 col-sm-4">
+												<!-- <div class="col-xs-12 col-sm-4">
 													<div class="form-group">
 														<label>Rooms</label>
 
@@ -96,24 +99,25 @@
 															<option value="5">5</option>
 														</select>
 													</div>
-												</div>
+												</div> -->
 
 												<div class="clear"></div>
 
 												<div class="col-sm-12">
-													<button class="btn btn-block btn-primary btn-icon mt-5">{{ site_content($site_content,'search') }} <span class="icon"><i class="fa fa-search"></i></span></button>
+													<button class="btn btn-block btn-primary btn-icon mt-5" id="search-subpage">{{ site_content($site_content,'search') }} <span class="icon"><i class="fa fa-search"></i></span></button>
 												</div>
 
 												<div class="clear mb-10"></div>
 
-												<div class="tooltip-light">
-													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div>
+												<!-- <div class="tooltip-light">
+													<p class="price-guarantee text-center hoover-help mb-0" data-toggle="tooltip" data-placement="top" title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug."><i class="fa fa-check-square-o text-success"></i> EXTRETION price guarantee</p></div> -->
 
 												<div class="clear"></div>
 
-											</form>
+											</div>
 										</div>
 									</div>
+									
 									<div class="result-filter-wrapper clearfix">
 
 										<h3><span class="icon"><i class="fa fa-sliders"></i></span> Filter</h3>

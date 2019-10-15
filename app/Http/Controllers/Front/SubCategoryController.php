@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\SubCategory;
 use App\Models\Tour;
+use App\Models\Tag;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -202,15 +203,9 @@ class SubCategoryController extends ParentController
 
 
         // return redirect(url('/'));
-        $city=City::where('name',$request->destination)->first();
-        if (isset($city)) {                    
-                foreach($city->country->category as $cat){
-                    foreach($cat->sub as $sub){
-                         $tours=$sub->tours->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to);
-                    }
-                } 
-        }
-        return view('front2.pages.tour.search_results',compact('tours'));
+        $tours=Tour::where('city',$request->destination)->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to)->get();
+        $tags=Tag::all();
+        return view('front2.pages.tour.search_results',compact('tours','tags'));
     }
     public function searchToursAjax(Request $request)
     {
@@ -218,14 +213,15 @@ class SubCategoryController extends ParentController
                          $tours=Tour::where('city','cairo')->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to)->get();
         return view('front2.pages.tour.ajax',compact('tours'));
     }
-    public function amenitiesToursAjax(Request $request,$tags=null,$sub_id)
+    public function amenitiesToursAjax(Request $request,$tags=null)
     {
 
-      //  $tours=Tour::whereHas('tags', function ($query) use($request) {
-      //   $query->whereIn('tags.id',$request->tags);
-      // })->get();
-      //   return $tours;
-        return '';
+       $tours=Tour::whereHas('tags', function ($query) use($request) {
+        $query->whereIn('tags.id',$request->tags);
+      })->get();
+        
+        return view('front2.pages.tour.ajax',compact('tours'));
+        
     //     $tours=Tour::whereHas('tags', function ($query) {
     //     $query->whereIn('tags.id',[3]);
     // })->get();

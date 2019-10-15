@@ -6,30 +6,30 @@ Route::group(['prefix'=>'city'],function()
 {
 	
 	// show all data an data table 
-	Route::get('/all','CityController@index')->name('get.city.index'); 
+	Route::get('/all','CityController@index')->middleware(['permission:read cities'])->name('get.city.index'); 
 	// view form for adding new item 
-	Route::get('/add','CityController@add')->name('get.city.add');  
+	Route::get('/add','CityController@add')->middleware(['permission:add cities'])->name('get.city.add');  
 	// store data of item 
-	Route::post('/store','CityController@store')->name('post.city.store'); 
+	Route::post('/store','CityController@store')->middleware(['permission:add cities'])->name('post.city.store'); 
 	// view data of specific item  
-	Route::get('/edit/{id}','CityController@edit')->name('get.city.edit')->where('id', '[0-9]+'); 
+	Route::get('/edit/{id}','CityController@edit')->middleware(['permission:edit cities'])->name('get.city.edit')->where('id', '[0-9]+'); 
 	// update data of specific item 
-	Route::put('/update','CityController@update')->name('put.city.update'); 
+	Route::put('/update','CityController@update')->middleware(['permission:edit cities'])->name('put.city.update'); 
 	// delete data of specific item
-	Route::get('/delete/{id}','CityController@delete')->name('get.city.delete')->where('id', '[0-9]+');
+	Route::get('/delete/{id}','CityController@delete')->middleware(['permission:delete cities'])->name('get.city.delete')->where('id', '[0-9]+');
 	// delete multi  item
-	Route::post('/delete/multi','CityController@deleteMulti')->name('post.city.deleteMulti'); 
+	Route::post('/delete/multi','CityController@deleteMulti')->middleware(['permission:delete cities'])->name('post.city.deleteMulti'); 
 
 	// sort elements
-	Route::post('/sort','CityController@sort')->name('post.city.sort'); 
+	Route::post('/sort','CityController@sort')->middleware(['permission:read cities'])->name('post.city.sort'); 
 	// make this item visibile or not  
-	Route::get('/visibility/{id}','CityController@visibility')->name('get.city.visibility')->where('id', '[0-9]+'); 
+	Route::get('/visibility/{id}','CityController@visibility')->middleware(['permission:read cities'])->name('get.city.visibility')->where('id', '[0-9]+'); 
 
 
 	// view data of seo
-	Route::get('/seo/{id}','CityController@seo')->name('get.city.seo')->where('id', '[0-9]+');
+	Route::get('/seo/{id}','CityController@seo')->middleware(['permission:read cities'])->name('get.city.seo')->where('id', '[0-9]+');
 	// update data of seo
-	Route::post('/seo/update','CityController@updateSeo')->name('post.city.updateSeo'); 
+	Route::post('/seo/update','CityController@updateSeo')->middleware(['permission:read cities'])->name('post.city.updateSeo'); 
 	
 
 });

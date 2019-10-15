@@ -15,70 +15,81 @@ class SettingsController extends Controller
 
 
     // return view of adding data 
+    public function __construct()
+    {
+        // $this->middleware(['permission:manage settings']);
+    }
     public function base()
     {
-        $data['base'] = Setting::where('language_id', language())->first();
-        if (!$data['base']) {
-            // create instance for this setting language first time 
-            $base = new Setting();
-            $base->language_id = language();
-            $base->save();
+        if(auth()->guard('admin')->user()->hasPermissionTo('manage settings')){
+            $data['base'] = Setting::where('language_id', language())->first();
+            if (!$data['base']) {
+                // create instance for this setting language first time 
+                $base = new Setting();
+                $base->language_id = language();
+                $base->save();
 
-            $data['base'] = $base;
+                $data['base'] = $base;
+            }
+            return view('admin.setting.base')->with($data);
+        }else{
+            return abort(403);
         }
-        return view('admin.setting.base')->with($data);
     }
 
 
     // storing data in db
     public function updateBase(SettingsRequest $request)
     {
+        if(auth()->guard('admin')->user()->hasPermissionTo('manage settings')){
+            $data = $request->validated();
+       
+            // upload image of this module
+            $old = Setting::findOrFail($request->id);
 
-        $data = $request->validated();
-   
-        // upload image of this module
-        $old = Setting::findOrFail($request->id);
-
-        if ($request->hasFile('logo')) {
-            // delete old image from server
-            if ($old->logo) {
-                Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->logo);
+            if ($request->hasFile('logo')) {
+                // delete old image from server
+                if ($old->logo) {
+                    Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->logo);
+                }
+                // UPLOADS_PATH.CATEGORY_PATH 
+                // -> static path ( you can change it from helpers/files/basehelper)
+                $img = UploadClass::uploadFile($request, 'logo', UPLOADS_PATH . SETTINGS_PATH, true, 250, 60, 300, 100);
+                $data['logo'] = $img;
             }
-            // UPLOADS_PATH.CATEGORY_PATH 
-            // -> static path ( you can change it from helpers/files/basehelper)
-            $img = UploadClass::uploadFile($request, 'logo', UPLOADS_PATH . SETTINGS_PATH, true, 250, 60, 300, 100);
-            $data['logo'] = $img;
-        }
-        if ($request->hasFile('logo2')) {
-            // delete old image from server
-            if ($old->logo2) {
-                Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->logo2);
+            if ($request->hasFile('logo2')) {
+                // delete old image from server
+                if ($old->logo2) {
+                    Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->logo2);
+                }
+                // UPLOADS_PATH.CATEGORY_PATH
+                // -> static path ( you can change it from helpers/files/basehelper)
+                $img = UploadClass::uploadFile($request, 'logo2', UPLOADS_PATH . SETTINGS_PATH, true, 250, 60, 300, 100);
+                $data['logo2'] = $img;
             }
-            // UPLOADS_PATH.CATEGORY_PATH
-            // -> static path ( you can change it from helpers/files/basehelper)
-            $img = UploadClass::uploadFile($request, 'logo2', UPLOADS_PATH . SETTINGS_PATH, true, 250, 60, 300, 100);
-            $data['logo2'] = $img;
-        }
 
-        if ($request->hasFile('video')) {
-            // delete old image from server
-            if ($old->video) {
-                Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->video);
+            if ($request->hasFile('video')) {
+                // delete old image from server
+                if ($old->video) {
+                    Storage::disk('public_uploads')->delete(SETTINGS_PATH . $old->video);
+                }
+                // UPLOADS_PATH.CATEGORY_PATH
+                // -> static path ( you can change it from helpers/files/basehelper)
+                $video = $this->uploudVideo($request->video);
+                $data['video'] = $video;
             }
-            // UPLOADS_PATH.CATEGORY_PATH
-            // -> static path ( you can change it from helpers/files/basehelper)
-            $video = $this->uploudVideo($request->video);
-            $data['video'] = $video;
+
+
+            //dd($data);
+
+            // updating data in db
+            Setting::where('id', $request->id)->update($data);
+            
+            session()->flash('message', trans('site.updated_success'));
+            return back();
+        }else{
+            return abort(403);
         }
-
-
-        //dd($data);
-
-        // updating data in db
-        Setting::where('id', $request->id)->update($data);
-        
-        session()->flash('message', trans('site.updated_success'));
-        return back();
     }
 
 
@@ -128,17 +139,20 @@ class SettingsController extends Controller
     public function siteContent()
     {
  
-        
-        $data['setting'] = Setting::where('language_id', language())->first();
-        if (!$data['setting']) {
-            // create instance for this setting language first time
-            $setting = new Setting();
-            $setting->language_id = language();
-            $setting->save();
-            $data['setting'] = $setting;
+        if(auth()->guard('admin')->user()->hasPermissionTo('manage settings')){
+            $data['setting'] = Setting::where('language_id', language())->first();
+            if (!$data['setting']) {
+                // create instance for this setting language first time
+                $setting = new Setting();
+                $setting->language_id = language();
+                $setting->save();
+                $data['setting'] = $setting;
+            }
+            $data['siteContent'] = json_decode($data['setting']['site_content']);
+            return view('admin.setting.siteContent')->with($data);
+        }else{
+            return abort(403);
         }
-        $data['siteContent'] = json_decode($data['setting']['site_content']);
-        return view('admin.setting.siteContent')->with($data);
     }
 
 
@@ -236,16 +250,20 @@ class SettingsController extends Controller
     // return view of about us page
     public function aboutus()
     {
-        $data['about'] = Setting::where('language_id', language())->first();
-        if (!$data['about']) {
-            // create instance for this setting language first time
-            $aboutus = new Setting();
-            $aboutus->language_id = language();
-            $aboutus->save();
-            $data['about'] = $aboutus;
+        if(auth()->guard('admin')->user()->hasPermissionTo('manage settings')){
+            $data['about'] = Setting::where('language_id', language())->first();
+            if (!$data['about']) {
+                // create instance for this setting language first time
+                $aboutus = new Setting();
+                $aboutus->language_id = language();
+                $aboutus->save();
+                $data['about'] = $aboutus;
+            }
+            $data['aboutus'] = json_decode($data['about']['who_us']);
+            return view('admin.setting.aboutus')->with($data);
+        }else{
+            return abort(403);
         }
-        $data['aboutus'] = json_decode($data['about']['who_us']);
-        return view('admin.setting.aboutus')->with($data);
     }
 
     // storing data in db

@@ -2,7 +2,7 @@
 
 //  categories routes
 //  
-Route::group(['prefix' => 'subscriber'], function () {
+Route::group(['prefix' => 'subscriber','middleware' => ['permission:manage subscribers']], function () {
     // show all data an data table
     Route::get('/all', 'SubscriberController@index')->name('get.subscriber.index');
     // delete data of specific item

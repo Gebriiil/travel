@@ -4,7 +4,7 @@
 //  
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'contact'], function () {
+Route::group(['prefix' => 'contact','middleware' => ['permission:manage contacts']], function () {
     // show all data an data table
     Route::get('/all', 'ContactController@index')->name('get.contact.index');
     // delete data of specific item

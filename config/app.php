@@ -179,6 +179,7 @@ return [
 
         //Debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

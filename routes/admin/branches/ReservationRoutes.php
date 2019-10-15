@@ -2,7 +2,7 @@
 
 //  categories routes
 //  
-Route::group(['prefix' => 'reservation'], function () {
+Route::group(['prefix' => 'reservation','middleware' => ['permission:manage reservations']], function () {
     // show all data an data table
     Route::get('/all', 'ReservationController@index')->name('get.reservation.index');
     // delete data of specific item

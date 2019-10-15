@@ -122,7 +122,39 @@
                                         <input type="password" name="confirm_password" class="form-control input-circle-right"  > </div>
                                 </div>
                             </div>
+                            <!-- Permmitions -->
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>@lang('site.permissions')</label>
+                                    <div class="nav-tabs-custom">
+                                        <?php
+                                            $models=['admins','categories','sub_categories','languages','cities','countries','hotels','tours','reviews','slider','settings','contacts','subscribers','reservations'];
+                                            $maps=['read','add','edit','delete'];
+                                        ?>
+                                        <ul class="nav nav-tabs">
+                                            @foreach( $models as $index=>$model)
+                                            <li class="{{ $index == 0 ? 'active':'' }}"><a href="#{{$model}}" data-toggle="tab">@lang('site.' . $model)</a></li>
+                                            @endforeach
+                                        </ul>
 
+                                        <div class="tab-content">
+                                           @foreach($models as $index=>$model) 
+                                            <div class="tab-pane {{ $index==0 ? 'active' : ''}}" id="{{$model}}">
+                                                @if($model == 'settings' || $model == 'contacts'|| $model == 'subscribers'|| $model == 'reservations' )
+                                                    <label><input type="checkbox" name="permissions[]" {{$row->hasPermissionTo('manage '.$model)?'checked':''}} value="{{'manage ' . $model}}">@lang('site.manage')</label>
+                                                @else
+                                                    @foreach($maps as $map)
+                                                        <label><input type="checkbox" name="permissions[]" {{$row->hasPermissionTo($map . ' ' . $model)?'checked':''}} value="{{$map . ' ' . $model}}">@lang('site.' . $map)</label>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                           @endforeach
+                                        </div><!-- end of tab content -->
+                                        
+                                    </div><!-- end of nav tabs -->
+                                
+                                </div>
+                            </div>
 
                         </div>
                         <div class="form-actions">

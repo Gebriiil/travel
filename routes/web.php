@@ -28,20 +28,13 @@ Route::group(
 
         Route::name('front.')->namespace('Front')->group(function () 
         {
-            Route::get('/search-tours', 'TourController@search')->name('get.tours.search');
+            Route::get('/search-tours', 'SubCategoryController@searchTours')->name('get.tours.search');
 
             Route::get('/sub-categories', 'CategoryController@childs')->name('ajax.get.subCategories');
-            Route::get('/', function(){
-                
-        
-        $tours=\App\Models\Tour::whereHas('tags', function ($query) {
-        $query->whereIn('tags.id',[3]);
-    })->get();
-        return $tours;
-            })->name('get.home.index');
+            Route::get('/', 'HomeController@index')->name('get.home.index');
             Route::get('/about', 'AboutUsController@index')->name('get.about.index');
-            Route::get('/contact', 'ContactUsController@index')->name('get.contact.index');
-            Route::get('/search', 'SubCategoryController@searchTours')->name('get.search.tours');
+            Route::get('/contact', 'ContactUsController@index')->name('get.contact.index'); 
+            Route::post('/search', 'SubCategoryController@searchTours')->name('get.search.tours');
             Route::post('/submit-contact', 'ContactUsController@sendMessage')->name('ajax.post.contact');
             Route::post('/subscribe', 'HomeController@subscribe')->name('ajax.post.subscribe');
             Route::post('/book', 'TourController@book')->name('ajax.post.booking');

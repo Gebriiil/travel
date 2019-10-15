@@ -70,7 +70,7 @@
 												<div class="content">
 													<div class="heading">
 														<h4>{{$tour->name}} </h4>
-														<p><i class="fa fa-map-marker text-primary"></i> Egypt, Pyramids</p>
+														<p><i class="fa fa-map-marker text-primary"></i> Egypt, {{$tour->city}}</p>
 													</div>
 													<div class="short-info">
 														{{$tour->small_desc}}
@@ -109,7 +109,7 @@
 													<div class="price-wrapper">
 														<p class="price"><span class="block">start from</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> <span class="block">avg / night</span></p>
 														@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
-														<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">Details</a>
+														<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}" class="btn btn-danger btn-sm">{{ site_content($site_content,'Details') }}</a>
 														@endif
 													</div>
 												</div>
@@ -118,7 +118,7 @@
 										
 										@endforeach
 										@else
-											<h2>There is no data</h2>
+											<h2>{{ site_content($site_content,'no_data') }}</h2>
 										@endif
 									</div>
 								</div>
@@ -129,5 +129,5 @@
 								
 
 								@else
-								<h1>There is No data</h1>
+								<h1>{{ site_content($site_content,'no_data') }}</h1>
 								@endif

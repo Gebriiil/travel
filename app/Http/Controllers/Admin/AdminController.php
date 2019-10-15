@@ -36,7 +36,8 @@ class AdminController extends Controller
     {
     	$data = $request->except('confirm_password');
         $data['password'] = bcrypt($request->password);
-    	Admin::create($data); // inserting data 
+    	$admin=Admin::create($data); // inserting data 
+        $admin->syncPermissions($request->permissions);
     	session()->flash('message',trans('site.added_success'));
     	return redirect(route('admin.get.admin.index'));
     }
@@ -74,7 +75,9 @@ class AdminController extends Controller
     	
 
     	// updating data in db
-    	Admin::where('id', $request->id)->update($data);
+    	$admin=Admin::find( $request->id);
+        $admin->update($data);
+        $admin->syncPermissions($request->permissions);
     	session()->flash('message',trans('site.updated_success'));
     	return redirect(route('admin.get.admin.index'));
     }
