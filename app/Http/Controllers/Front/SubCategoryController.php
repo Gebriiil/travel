@@ -215,7 +215,11 @@ class SubCategoryController extends ParentController
     }
     public function amenitiesToursAjax(Request $request,$tags=null)
     {
-
+        if($request->has('prices')){
+           $prices=explode(",",$request->prices);
+           $tours=Tour::where('price_start_from', '>=', $prices[0])->where('price_start_from','<=',$prices[1])->get();
+           return view('front2.pages.tour.ajax',compact('tours'));
+        }
        $tours=Tour::whereHas('tags', function ($query) use($request) {
         $query->whereIn('tags.id',$request->tags);
       })->get();

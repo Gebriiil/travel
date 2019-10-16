@@ -2,11 +2,11 @@
 
 //  categories routes
 //  
-Route::group(['prefix' => 'reservation','middleware' => ['permission:manage reservations']], function () {
+Route::group(['prefix' => 'reservation'], function () {
     // show all data an data table
-    Route::get('/all', 'ReservationController@index')->name('get.reservation.index');
+    Route::get('/all', 'ReservationController@index')->middleware(['reversation'])->name('get.reservation.index');
     // delete data of specific item
-    Route::get('/delete/{id}', 'ReservationController@delete')->name('get.reservation.delete')->where('id', '[0-9]+');
+    Route::get('/delete/{id}', 'ReservationController@delete')->middleware(['reversation'])->name('get.reservation.delete')->where('id', '[0-9]+');
     // delete multi  item
-    Route::post('/delete/multi', 'ReservationController@deleteMulti')->name('post.reservation.deleteMulti');
+    Route::post('/delete/multi', 'ReservationController@deleteMulti')->middleware(['reversation'])->name('post.reservation.deleteMulti');
 });

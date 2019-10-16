@@ -40,6 +40,7 @@
 
 	<!-- CSS Custom -->
 	<link href="{{furl()}}/css/style.css" rel="stylesheet">
+	<link href="{{furl()}}/css/bootstrap-slider.css" rel="stylesheet">
 	
 	<!-- Add your style -->
 	<link href="{{furl()}}/css/your-style.css" rel="stylesheet">

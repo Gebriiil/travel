@@ -280,7 +280,7 @@
 
 
 
-										<div class=" row gap-20 clearfix">
+										<!-- <div class=" row gap-20 clearfix">
 											<div class="col-xs-12 col-sm-8">
 												<h5 class="font400 text-uppercase mb-15 font16">Main amenities</h5>
 												<ul class="list-col-2 list-with-icon">
@@ -308,11 +308,12 @@
 													<li><i class="fa fa-map-marker text-primary"></i> Suntec City (0.8 mi / 1.2 km)</li>
 												</ul>
 											</div>
-										</div>
+										</div> -->
 
 										<div class="bb mt-10"></div>
 
 									</div>
+												@if(count($itineraries))
 									<div id="detail-content-sticky-nav-03" class="pt-30">
 
 										<div class="section-title-3">
@@ -347,6 +348,7 @@
 										<div class="bb mt-30"></div>
 
 									</div>
+												@endif
 									
 
 									<div id="detail-content-sticky-nav-05" class="pt-30">

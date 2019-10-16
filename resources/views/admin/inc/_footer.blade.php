@@ -64,7 +64,7 @@
         <script src="{{aurl()}}/seoera/plugins/sweetalert/sweetalert.min.js"></script>
         <script src="{{aurl()}}/seoera/plugins/confirmation/jquery-confirm.min.js"></script>
         <script src="{{aurl()}}/seoera/js/endScript.js" type="text/javascript"></script>
-
+        @include('admin.inc.ajax.permission_error')
 
 
 

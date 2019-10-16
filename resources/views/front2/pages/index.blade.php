@@ -145,13 +145,14 @@
 									<a href="{{ route('front.get.category.index',$category->slug) }}">
 										<div class="image">
 											<img src="
-											{{ getImage(TOUR_PATH.$category->img) }}" alt="{{ json_value($category,'img_alt') }}" title="{{ json_value($category,'img_title') }}">
+											{{ getImage(CATEGORY_PATH.$category->img) }}" alt="{{ json_value($category,'img_alt') }}" title="{{ json_value($category,'img_title') }}">
 										</div>
 										<div class="content">
 											<div class="row gap-10">
 
 												<div class="col-xs-7 place">
-													<h4>{{$category->country?$category->country->name:''}}</h4>
+													<h4>{{$category->name?$category->name:''}}</h4>
+													<p>{{$category->country?$category->country->name:''}}</p>
 												</div>
 												<?php
 												   $subs=$category->sub?$category->sub->count():0;

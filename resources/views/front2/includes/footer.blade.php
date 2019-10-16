@@ -110,9 +110,21 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	<script type="text/javascript" src="{{furl()}}/js/infobox.js"></script>
 	<script type="text/javascript" src="{{furl()}}/js/customs-detail-page.js"></script>
-	@include('front.ajax.subscribe')
+	<script type="text/javascript" src="{{furl()}}/js/bootstrap-slider.js"></script>
+	@include('front.ajax.subscribe') 
 	@include('front.ajax.tours')
 	@include('front.ajax.booking')
+	<script>
+	  
+		$("#price_range").slider({});
+		// Without JQuery
+		$(document).ready(function () {
+			console.log($('#price_ranges').val());
+		});
+		
+	
+		
+	  </script>
 
 </body>
 

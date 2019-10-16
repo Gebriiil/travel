@@ -120,18 +120,12 @@
 									
 									<div class="result-filter-wrapper clearfix">
 
-										<h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'filter') }}</h3>
+										<!-- <h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'filter') }}</h3> -->
 
-										<div class="another-toggle filter-toggle">
-											<h4 class="active">{{ site_content($site_content,'price') }}</h4>
-											<div class="another-toggle-content">
-												<div class="another-toggle-inner">
-													<div class="range-slider-wrapper">
-														<input id="price_range" />
-													</div>
-												</div>
-											</div>
-										</div>
+										<input id="price_range" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/><br><br><center>
+													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="price-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
+												</center>
+												<br>
 
 										<div class="another-toggle filter-toggle">
 											<h4 class="active">{{ site_content($site_content,'star') }}</h4>
@@ -491,27 +485,7 @@
 
 										<h3><span class="icon"><i class="fa fa-sliders"></i></span> Filter</h3>
 
-										<div class="another-toggle filter-toggle">
-											<h4 class="active">Price</h4>
-											<div class="another-toggle-content">
-												<div class="another-toggle-inner">
-													<div class="range-slider-wrapper">
-														<input id="price_range" />
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="another-toggle filter-toggle">
-											<h4 class="active">Star Rating</h4>
-											<div class="another-toggle-content">
-												<div class="another-toggle-inner">
-													<div class="range-slider-wrapper">
-														<input id="star_rating_range" />
-													</div>
-												</div>
-											</div>
-										</div>
+										
 
 										<div class="another-toggle filter-toggle">
 											<h4 class="active">Amenities</h4>
