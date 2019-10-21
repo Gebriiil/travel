@@ -1012,9 +1012,8 @@ a.navbar-brand {
 
 .main-search-wrapper-2 .btn-absolute {
 		position: absolute;
-		bottom: 21px; 
+		bottom: 22px;
 		right: 0;
-		width: 150px; 
 } 
 
 .main-search-wrapper-2 .btn-absolute .btn {
@@ -1137,6 +1136,7 @@ a.navbar-brand {
 
 .top-destination-item .image img {
     transition: all .3s ease-in-out;
+    height: 200px;
 }
 
 .top-destination-item:hover .image img {
@@ -1150,9 +1150,8 @@ a.navbar-brand {
 }
 
 .top-destination-item h4 {
-    font-size: 16px;
-    text-transform: uppercase;
-    line-height: 1;
+    font-size: 14px;
+    line-height: 20px;
     margin: 0 0 2px;
     font-weight: 500;
 }
@@ -1340,6 +1339,8 @@ ul.destination-list li.more-link a:hover {
 
 .hotel-item-grid .image img {
     transition: all .3s ease-in-out;
+    height: 175px;
+    width: 100%;
 }
 
 .hotel-item-grid:hover .image img {
@@ -4210,6 +4211,7 @@ ul.paging li.disable a {
 
 .slick-testimonial-wrapper .testimonial-man img {
     border-radius: 50%;
+    height: 55px;
 }
 
 .slick-testimonial-wrapper .testimonial-man .image:hover {

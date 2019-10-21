@@ -16,6 +16,19 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+             
+                <label>TOURS</label>
+                <input type="text"  name="tours" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'tours') }} "> 
+            </div>
+        </div>
+    </div>
 
 
    

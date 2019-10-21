@@ -185,6 +185,8 @@ return [
     'email_error'           => 'The Field canot be empty',
     'success'               =>'Success',
     'ok'                    =>'Ok',
+    'error'                    =>'Error',
+    'tags'                    =>'Tags',
 
 
 ];

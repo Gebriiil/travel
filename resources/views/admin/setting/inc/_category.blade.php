@@ -172,7 +172,7 @@
                   
                      <label>Show</label>
                      <input type="text"  name="Show" class="form-control input-circle-right count-text-desc-keywords"
-                     value="{{ site_content($siteContent,'ShowShow') }} "> 
+                     value="{{ site_content($siteContent,'Show') }} "> 
                  </div>
              </div>
     </div>   
@@ -186,19 +186,6 @@
                      <label>start from</label>
                      <input type="text"  name="start_from" class="form-control input-circle-right count-text-desc-keywords"
                      value="{{ site_content($siteContent,'start_from') }} "> 
-                 </div>
-             </div>
-    </div>
-    <div class="col-sm-4">
-            <div class="form-group">
-                 <div class="input-group">
-                     <span class="input-group-addon input-circle-left">
-                         <i class="fa fa-text-width"></i>
-                     </span>
-                  
-                     <label>night</label>
-                     <input type="text"  name="night" class="form-control input-circle-right count-text-desc-keywords"
-                     value="{{ site_content($siteContent,'night') }} "> 
                  </div>
              </div>
     </div>

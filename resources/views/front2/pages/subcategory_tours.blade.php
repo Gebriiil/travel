@@ -1,6 +1,6 @@
 @extends('front2.master')
 @section('content')
-	@if(isset($subs)) 
+	@if(isset($sub)) 
 		<div class="not-home">
 			<!-- start Main Wrapper -->
 			<div class="main-wrapper">
@@ -58,6 +58,7 @@
 														<label>{{ site_content($site_content,'to') }}</label>
 														<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end" id="to-in-subpage">
 														<i class="fa fa-money"></i>
+														<input type="hidden" id="cat-id-subpage" value="{{$category->id}}">
 													</div>
 												</div>
 												<!-- <div class="col-xs-12 col-sm-4">
@@ -120,23 +121,32 @@
 									
 									<div class="result-filter-wrapper clearfix">
 
-										<!-- <h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'filter') }}</h3> -->
+										 <h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'filter') }}</h3>
 
-										<input id="price_range" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/><br><br><center>
-													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="price-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
-												</center>
-												<br>
+											<input id="price_range_2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="2000" data-slider-step="5" data-slider-value="[250,450]"/>
+											<button class="btn bt_rang" data-toggle="collapse" data-target="#amenities-more-less" id="price-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
 
-										<div class="another-toggle filter-toggle">
+
+
+										<h3><span class="icon"><i class="fa fa-sliders"></i></span> {{ site_content($site_content,'star') }}</h3>
+
+												<input id="star_range" type="text" class="span2" value="" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="[250,450]"/>
+												<button class="btn bt_rang" data-toggle="collapse" data-target="#amenities-more-less" id="star-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
+
+
+										<!-- <div class="another-toggle filter-toggle">
 											<h4 class="active">{{ site_content($site_content,'star') }}</h4>
 											<div class="another-toggle-content">
 												<div class="another-toggle-inner">
 													<div class="range-slider-wrapper">
 														<input id="star_rating_range" />
 													</div>
+													<br><br><center>
+													<button class="btn " data-toggle="collapse" data-target="#amenities-more-less" id="price-filter-tours-btn">{{ site_content($site_content,'Show') }}</button>
+												</center>
 												</div>
 											</div>
-										</div> 
+										</div>  -->
 
 										<div class="another-toggle filter-toggle">
 											<h4 class="active">{{ site_content($site_content,'amenities') }}</h4>
@@ -284,8 +294,8 @@
 									<div class="top-hotel-grid-wrapper" id="grid_container">
 
 										<div class="row gap-20 min-height-alt" >
-											@foreach($subs as $sub)
-											@foreach($sub->tours as $tour)
+											
+											@foreach($tours as $tour)
 											<div class="col-xss-12 col-xs-12 col-sm-6 col-mdd-6 col-md-4" data-match-height="result-grid" >
 
 												<div class="hotel-item-grid">
@@ -320,7 +330,7 @@
 																		<?php } ?>
 																			</div>
 																		</div>
-																		<div class="hover-underline">324 {{ site_content($site_content,'reviews') }}</div>
+																		<div class="hover-underline"> {{ site_content($site_content,'reviews') }}</div>
 																	</div>
 																</div>
 																<div class="col-xs-6 col-sm-6">
@@ -333,7 +343,6 @@
 
 											</div>
 											@endforeach
-											@endforeach
 										</div>
 										
 									
@@ -341,9 +350,7 @@
 									</div>
 									<div class="hotel-item-list-wrapper mb-40" id="list_container" >
 										<div class="hotel-item-list-wrapper mb-40" >
-
-											@foreach($subs as $sub)
-											@foreach($sub->tours as $tour)
+											@foreach($tours as $tour)
 											<div class="hotel-item-list">
 													<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$tour->img) }}');"></div>
 													<div class="content">
@@ -393,8 +400,7 @@
 														</div>
 													</div>
 											</div>
-											
-											@endforeach
+										
 											@endforeach
 										</div>
 									</div>

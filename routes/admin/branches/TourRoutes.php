@@ -2,10 +2,10 @@
 
 //  categories routes
 //  
-Route::group(['prefix' => 'tour:read'], function () {
+Route::group(['prefix' => 'tour'], function () {
 
     // show all data an data table
-    Route::get('/all', 'TourController@index')->middleware(['tour:read'])->name('get.tour.index');
+    Route::get('/all', 'TourController@index')->name('get.tour.index');
     // view form for adding new item
     Route::get('/add', 'TourController@add')->middleware(['tour:add'])->name('get.tour.add');
     // store data of item

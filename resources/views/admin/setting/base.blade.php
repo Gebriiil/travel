@@ -174,6 +174,17 @@
                                         <input type="email" name="email" class="form-control input-circle-right"
                                                value="{{ $base->email }}"></div>
                                 </div>
+                            </div> 
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> @lang('site.site_email') </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon input-circle-left">
+                                            <i class="fa fa-envelope"></i>
+                                        </span>
+                                        <input type="email" name="site_email" class="form-control input-circle-right"
+                                               value="{{ $base->site_email }}"></div>
+                                </div>
                             </div>
 
                             <div class="col-sm-6">

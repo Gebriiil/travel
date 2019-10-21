@@ -209,18 +209,35 @@ class SubCategoryController extends ParentController
     }
     public function searchToursAjax(Request $request)
     {
-        $city=City::where('name',$request->destination)->first();
-                         $tours=Tour::where('city','cairo')->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to)->get();
+        $category=Category::find($request->cat_id);
+        $sub_ids=[];
+        foreach($category->sub as $sub){
+            array_push($sub_ids,$sub->id);
+        }
+        $tours=Tour::whereIn('sub_category_id',$sub_ids)->where('city',$request->destination)->where('price_start_from', '>=', $request->from)->where('price_start_from','<=',$request->to)->get();
         return view('front2.pages.tour.ajax',compact('tours'));
     }
     public function amenitiesToursAjax(Request $request,$tags=null)
     {
-        if($request->has('prices')){
-           $prices=explode(",",$request->prices);
-           $tours=Tour::where('price_start_from', '>=', $prices[0])->where('price_start_from','<=',$prices[1])->get();
-           return view('front2.pages.tour.ajax',compact('tours'));
+        $category=Category::find($request->cat_id);
+        $sub_ids=[];
+        if(isset($category->sub)){
+            foreach($category->sub as $sub){
+            array_push($sub_ids,$sub->id);
+            }
         }
-       $tours=Tour::whereHas('tags', function ($query) use($request) {
+        
+        if($request->has('prices')){
+          $prices=explode(",",$request->prices);
+          $tours=Tour::whereIn('sub_category_id',$sub_ids)->where('price_start_from', '>=', $prices[0])->where('price_start_from','<=',$prices[1])->get();
+          return view('front2.pages.tour.ajax',compact('tours'));
+        }
+        if($request->has('stars')){
+          $stars=explode(",",$request->stars);
+          $tours=Tour::whereIn('sub_category_id',$sub_ids)->where('num_of_stars', '>=', $stars[0])->where('num_of_stars','<=',$stars[1])->get();
+          return view('front2.pages.tour.ajax',compact('tours'));
+        }
+      $tours=Tour::whereIn('sub_category_id',$sub_ids)->whereHas('tags', function ($query) use($request) {
         $query->whereIn('tags.id',$request->tags);
       })->get();
         
@@ -229,7 +246,6 @@ class SubCategoryController extends ParentController
     //     $tours=Tour::whereHas('tags', function ($query) {
     //     $query->whereIn('tags.id',[3]);
     // })->get();
-    //     return $tours;
     //     return view('front2.pages.tour.ajax',compact('tours'));
     }
 }

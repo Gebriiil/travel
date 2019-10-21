@@ -13,17 +13,18 @@ use Illuminate\Http\Request;
 class CategoryController extends ParentController
 {
 
-    public function index($categorySlug)
+    public function index($categorySlug,$subCategorySlug)
     {
         // check if this category exist or not 
-        $category = Category::where('slug',$categorySlug)->first();
+        $category = Category::where('slug',$categorySlug)->first(); 
         if(isset($category->sub)){
             if($category->sub->count()>0)
             {
                 $data['row'] = $category;
-                $subs=$category->sub;
+                $sub=$category->sub()->where('slug',$subCategorySlug)->first();
+               $tours=$sub->tours;
                 $tags=Tag::all();
-                return view('front2.pages.subcategory_tours',compact('category','subs','tags'));
+                return view('front2.pages.subcategory_tours',compact('category','sub','tags','tours'));
             }
         }
         return redirect(url('/'));

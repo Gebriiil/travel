@@ -13,8 +13,8 @@
 							<div class="col-xs-12 col-sm-8">
 								<ol class="breadcrumb">
 									<li><a href="#">{{ site_content($site_content,'home') }}</a></li>
-									<li><a href="#">Destinations</a></li>
-									<li class="active">Destination</li>
+									<li><a href="#">{{ site_content($site_content,'destinations') }}</a></li>
+									<li class="active">{{ site_content($site_content,'destination') }}</li>
 								</ol>
 							</div>
 
@@ -37,10 +37,10 @@
 										<div class="box_price">
 											<h3>DETAILS TOURS</h3>
 											<span>{{$category->name}}</span>
-											<p>EGYPT SHORE EXCURSIONS</p>
+											<p>{{$tour->subCategory->name}}</p>
 
 											<span>PRICE</span>
-											<p> {{$tour->price_start_from}}$/ PERSON</p>
+											<p> {{getPrice($tour->price_start_from)}} {{getCurrency()}}/ PERSON</p>
 
 											<span>LOCATION</span>
 											<p>{{$category->country->name}}</p>
@@ -178,7 +178,7 @@
 									<div class="row gap-5">
 										<div class="col-xs-12 col-sm-8 col-md-9">
 											<h2>{{ $tour->name }}</h2>
-											<p class="mb-0">Egypt , Pyramids</p>
+											<p class="mb-0">{{$category->country->name}} , {{$tour->city}}</p>
 										</div>
 										<div class="col-xs-12 col-sm-4 col-md-3">
 											<div class="tripadvisor-module text-right">
@@ -202,7 +202,7 @@
 										</div>
 									</div>
 
-								</div>
+								</div> 
 								<div class="detail-content-for-sticky-menu mb-50">
 									<div class="clear"></div>
 									<div id="detail-content-sticky-nav-01">
@@ -441,10 +441,13 @@
 						<div class="top-hotel-grid-wrapper">
 							<div class="GridLex-gap-20-wrapper">
 								<div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
+									<?php $k=0; ?>
 									@foreach($sub_category->tours as $tour)
+										<?php $k++; ?>
+										@if($k<=8)
 									<div class="GridLex-col-3_sm-4_xs-6_xss-12 mb-20">
 										<div class="hotel-item-grid">
-											@if($tour->subCategory()->count() &&$tour->subCategory->category()->count() )
+											@if($tour->subCategory()->count() &&$tour->subCategory->category()->count())
 												<a href="{{murl($tour->subCategory->category->slug.'/'.$tour->subCategory->slug.'/'.$tour->slug)}}">
 											@else
 											<a href="#">
@@ -454,7 +457,7 @@
 												</div>
 												<div class="heading">
 													<h4> {{$tour->name}} </h4>
-													<p><i class="fa fa-map-marker text-primary"></i> Cairo, Egypt</p>
+													<p><i class="fa fa-map-marker text-primary"></i> {{$tour->city}}, {{$category->country->name}}</p>
 												</div>
 												<div class="content">
 													<div class="row gap-5">
@@ -479,13 +482,14 @@
 															</div>
 														</div>
 														<div class="col-xs-6 col-sm-6">
-															<p class="price"><span class="block">start from</span><span class="number">{{$tour->price_start_from}}$</span> / night</p>
+															<p class="price"><span class="block">{{ site_content($site_content,'start_from') }}</span><span class="number">{{getPrice($tour->price_start_from)}} {{getCurrency()}}</span> / night</p>
 														</div>
 													</div>
 												</div>
 											</a>
 										</div>
 									</div>
+									@endif
 									@endforeach
 								</div>
 							</div>

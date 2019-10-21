@@ -23,7 +23,7 @@
 	<link href="{{furl()}}/css/animate.css" rel="stylesheet">
 	<link href="{{furl()}}/css/main.css" rel="stylesheet">
 	<link href="{{furl()}}/css/component.css" rel="stylesheet">
-	
+
 	<!-- CSS Font Icons -->
 	<link rel="stylesheet" href="{{furl()}}/icons/open-iconic/font/css/open-iconic-bootstrap.css">
 	<link rel="stylesheet" href="{{furl()}}/icons/font-awesome/css/font-awesome.min.css">
@@ -40,13 +40,15 @@
 
 	<!-- CSS Custom -->
 	<link href="{{furl()}}/css/style.css" rel="stylesheet">
-	<link href="{{furl()}}/css/bootstrap-slider.css" rel="stylesheet">
+	
 	
 	<!-- Add your style -->
 	<link href="{{furl()}}/css/your-style.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-
+@if(isset($slider_class))
+	<link href="{{furl()}}/css/bootstrap-slider.css" rel="stylesheet">
+@endif
 	
 </head>
 

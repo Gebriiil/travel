@@ -155,6 +155,7 @@ class TourController extends ParentController
             $data['special_offers'] = Tour::where('language_id', lang_front())
                 ->where('show_in_special_offers', 'yes')
                 ->get();
+            $data['tour_links']='links';
 
 
             return view('front2.pages.tour.view')->with($data);

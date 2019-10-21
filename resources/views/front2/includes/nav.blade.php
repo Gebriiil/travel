@@ -13,7 +13,7 @@
 				<div class="container">
 						
 					<div class="navbar-header">
-						<a class="navbar-brand" href="{{murl('/')}}"> <img src="{{furl()}}/images/logo.png" class="logo_main"> </a>
+						<a class="navbar-brand" href="{{murl('/')}}"> <img src="{{ getImage(SETTINGS_PATH.json_value($settings,'logo')) }}" alt="{{ json_value($settings,'img_alt') }}" title="{{ json_value($settings,'img_title') }}" class="logo_main"> </a>
 					</div>
 						
 					<div id="navbar" class="collapse navbar-collapse navbar-arrow pull-left">
@@ -47,9 +47,9 @@
 										<i class="ion-social-usd hidden-xss"></i> {{getCurrency()}}
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="currency-dropdown">
-										<li><a href="/switch-currency/USD"><i class="ion-social-usd"></i> Dollar</a></li>
-										<li><a href="/switch-currency/EUR"><i class="ion-social-euro"></i> Europe</a></li>
-										<li><a href="/switch-currency/YER"><i class="ion-social-yen"></i> Yen</a></li>
+										<li><a href="{{murl('switch-currency/USD')}}"><i class="ion-social-usd"></i> Dollar</a></li>
+										<li><a href="{{murl('switch-currency/EUR')}}"><i class="ion-social-euro"></i> Europe</a></li>
+										<li><a href="{{murl('switch-currency/YER')}}"><i class="ion-social-yen"></i> Yen</a></li>
 									</ul>
 								</li>
 								<li class="dropdown bt-dropdown-click">

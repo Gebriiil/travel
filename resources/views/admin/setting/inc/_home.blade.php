@@ -421,6 +421,42 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+                <label>Keep in touch</label>
+                <input type="text"  name="Keep_in_touch" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'Keep_in_touch') }} "> 
+            </div>
+        </div>
+    </div>    
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+                <label>Keep in touch desc</label>
+                <input type="text"  name="Keep_in_touch_desc" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'Keep_in_touch_desc') }} "> 
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+       <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon input-circle-left">
+                    <i class="fa fa-text-width"></i>
+                </span>
+                <label>Address</label>
+                <input type="text"  name="address" class="form-control input-circle-right count-text-desc-keywords"
+                value="{{ site_content($siteContent,'address') }} "> 
+            </div>
+        </div>
+    </div>
     
     
     

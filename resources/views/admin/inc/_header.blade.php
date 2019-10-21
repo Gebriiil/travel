@@ -25,8 +25,7 @@
         <!-- end -->
 
         <link href="{{aurl()}}/seoera/plugins/confirmation/jquery-confirm.min.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+        
 
 
 

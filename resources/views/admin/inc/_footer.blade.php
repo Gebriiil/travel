@@ -62,6 +62,8 @@
         @yield('script')
 
         <script src="{{aurl()}}/seoera/plugins/sweetalert/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
         <script src="{{aurl()}}/seoera/plugins/confirmation/jquery-confirm.min.js"></script>
         <script src="{{aurl()}}/seoera/js/endScript.js" type="text/javascript"></script>
         @include('admin.inc.ajax.permission_error')

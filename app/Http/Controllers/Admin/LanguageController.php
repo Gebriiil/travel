@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\LanguageRequest;
 use App\Http\Controllers\Controller;
-use App\Models\language;
+use App\Models\Language;
 
 use Image;
 use Storage;
@@ -16,7 +16,7 @@ class LanguageController extends Controller
     public function index()
     {
 
-    	$data['languages'] = language::orderBy('sort')
+    	$data['languages'] = Language::orderBy('sort')
     	->get();
     	return view('admin.language.index')->with($data);
     }
@@ -46,7 +46,7 @@ class LanguageController extends Controller
             $img = UploadClass::uploadFile($request,'icon',UPLOADS_PATH.LANGUAGE_PATH,true,100,100,100,100);
             $data['icon'] = $img;
         }
-    	language::create($data); // inserting data 
+    	Language::create($data); // inserting data 
     	session()->flash('message',trans('site.added_success'));
     	return redirect(route('admin.get.language.index'));
     }
@@ -60,7 +60,7 @@ class LanguageController extends Controller
     // return view of editing data 
     public function edit($id)
     {
-    	$data['row'] = language::findOrFail($id);
+    	$data['row'] = Language::findOrFail($id);
     	return view('admin.language.edit')->with($data);
     }
 
@@ -86,7 +86,7 @@ class LanguageController extends Controller
             $data['icon'] = $img;
         }
     	// updating data in db
-    	language::where('id', $request->id)->update($data);
+    	Language::where('id', $request->id)->update($data);
     	session()->flash('message',trans('site.updated_success'));
     	return redirect(route('admin.get.language.index'));
     }
@@ -112,7 +112,7 @@ class LanguageController extends Controller
     // deleteing row from db  ( soft delete )
     public function delete($id)
     {
-    	language::findOrFail($id)->delete();
+    	Language::findOrFail($id)->delete();
     	session()->flash('message',trans('site.deleted_success'));
     	return redirect(route('admin.get.language.index'));
 
@@ -123,7 +123,7 @@ class LanguageController extends Controller
     {
     	foreach ($request->deleteMulti as  $value) 
     	{
-    		language::findOrFail($value)->delete();
+    		Language::findOrFail($value)->delete();
 	    	
     	}
 
@@ -138,7 +138,7 @@ class LanguageController extends Controller
     	$i = 1;
     	foreach ($request->sort as  $value) 
     	{
-    		$data = language::find($value);
+    		$data = Language::find($value);
     		$data->sort = $i;
     		$data->save();
     		$i++;
@@ -155,7 +155,7 @@ class LanguageController extends Controller
     // visibility  for this item ( active or not active  -- change status of this item )
     public function visibility($id)
     {
-    	$data = language::findOrFail($id);
+    	$data = Language::findOrFail($id);
 
     	switch ($data->status) 
     	{

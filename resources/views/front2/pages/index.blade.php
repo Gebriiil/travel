@@ -1,5 +1,6 @@
 @extends('front2.master')
 @section('content')
+
 	<!-- start Main Wrapper --> 
 		<div class="main-wrapper">
 		
@@ -50,7 +51,7 @@
 						@csrf
 						<div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-6">
+							<div class="col-xs-12 col-sm-12 col-md-5">
 
 								<div class="typeahead-container form-group form-icon-right">
 
@@ -64,25 +65,29 @@
 
 							</div>
 
-							<div class="col-xss-12 col-xs-12 col-sm-6">
+							<div class="col-xss-12 col-xs-12 col-sm-7">
 
 								<div class="row gap-10">
 
-									<div class="col-xss-12 col-xs-6 col-sm-6">
+									<div class="col-xss-12 col-xs-6 col-sm-5">
 										<div class="form-group form-icon-right">
 											<label for="dpd1">{{ site_content($site_content,'from') }}:</label>
 											<input  name="from" type="number" autocomplete="off" class="form-control" placeholder="Price-start">
 											<i class="fa fa-money"></i>
 										</div>
 									</div>
-
-									<div class="col-xss-12 col-xs-6 col-sm-6">
+									<div class="col-xss-12 col-xs-6 col-sm-5">
 										<div class="form-group form-icon-right">
 											<label for="dpd2">{{ site_content($site_content,'to') }}:</label>
 											<input  name="to" type="number" autocomplete="off" class="form-control" placeholder="Price-end">
 											<i class="fa fa-money"></i>
 										</div>
 									</div>
+									<div class="col-xss-12 col-xs-6 col-sm-2 btn-absolute">
+										<button type="submit" class="btn btn-block btn-danger">{{ site_content($site_content,'search') }}</button>
+									</div>
+
+
 									<!-- <div class="col-xss-12 col-xs-6 col-sm-6">
 										<div class="form-group form-icon-right">
 											<label for="dpd1">Check-in</label>
@@ -102,15 +107,11 @@
 								</div>
 							</div>
 
-							
+
 
 						</div>
 
-						<div class="btn-absolute">
 
-							<button type="submit" class="btn btn-block btn-danger">{{ site_content($site_content,'search') }}</button>
-
-						</div>
 
 					</form>
 
@@ -150,7 +151,7 @@
 										<div class="content">
 											<div class="row gap-10">
 
-												<div class="col-xs-7 place">
+												<div class="col-xs-10 place">
 													<h4>{{$category->name?$category->name:''}}</h4>
 													<p>{{$category->country?$category->country->name:''}}</p>
 												</div>
@@ -158,12 +159,12 @@
 												   $subs=$category->sub?$category->sub->count():0;
 												   $sub2=0;
 												   foreach($category->sub as $sub){
-												   	$sub2+=$sub->tours?$sub->tours->count():0;
+												   	$sub2+=$sub->tours?$sub->tours()->count():0;
 												   }
-												   $tour_num=$subs*$sub2;
+												   $tour_num=$sub2;
 												?>
-												<div class="col-xs-5 price">
-													<p>{{$tour_num}}</p>
+												<div class="col-xs-2 price">
+													<p>{{$tour_num}} {{ site_content($site_content,'tours') }}</p>
 													<p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
 												</div>
 
@@ -208,6 +209,7 @@
 							<?php $x=0; ?>
 							@if (count($special_offers)>0)
 							@foreach($special_offers as $offer)
+							<?php $x++ ?>
 							@if($x<=4)
 
 
@@ -215,11 +217,11 @@
 
 									<div class="recent-post">
 
-										<div class="image" style="background-image:url('images/special-offers/01.jpg');"></div>
+										<div class="image" style="background-image:url('{{ getImage(TOUR_PATH.$special_offers[$x]->img) }}');"></div>
 
 										<div class="content">
 
-											<h4> {{ $special_offers[$x]->name }}  </h4>
+											<h4> {{ $offer->name }}  </h4>
 											<div class="review_rating">
 												<?php 
 												for($z=1;$z<=5;$z++){
@@ -234,8 +236,8 @@
 													<?php } ?>
 											</div>
 
-											<p class="price_offers"><span>start from</span><span class="number">{{$special_offers[$x]->price_start_from}}$</span> / night</p>
-											<a href="#" class="btn-read-more">read more <i class="fa fa-long-arrow-right"></i></a>
+											<p class="price_offers"><span>{{ site_content($site_content,'from') }}</span><span class="number">{{getPrice($offer->price_start_from)}} {{getCurrency()}}</span> / {{ site_content($site_content,'night') }}</p>
+											<a href="{{murl($offer->subCategory->category->slug.'/'.$offer->subCategory->slug.'/'.$offer->slug)}}" class="btn-read-more">{{ site_content($site_content,'view_more') }}<i class="fa fa-long-arrow-right"></i></a>
 
 										</div>
 
@@ -310,11 +312,11 @@
 																	<?php } ?>
 																</div>
 															</div>
-															<div class="hover-underline"> reviews</div>
+															<div class="hover-underline"> {{ site_content($site_content,'reviews') }}</div>
 														</div>
 													</div>
 													<div class="col-xs-6 col-sm-6">
-														<p class="price"><span class="block">{{ site_content($site_content,'from') }}:</span><span class="number">{{ $latest_item->price_start_from }}$</span> / night</p>
+														<p class="price"><span class="block">{{ site_content($site_content,'from') }}:</span><span class="number">{{getPrice($latest_item->price_start_from)}} {{getCurrency()}}</span> / {{ site_content($site_content,'night') }}</p>
 													</div>
 												</div>
 											</div>
@@ -336,33 +338,19 @@
 			<div class="clear"></div>
 
 			<div class="bg-white">
-			<div class="container pt-50 pb-50">
-
-				<div class="container">
-
+				<div class="container pt-50 pb-50">
 					<div class="row">
-
 						<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
 							<div class="section-title">
 								<h2>{{ site_content($site_content,'client_say') }}</h2>
 								<p>{{ site_content($site_content,'client_desc') }}</p>
 							</div>
-
 						</div>
-
 					</div>
 
 					<div class="row">
-
 						<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
 							<div class="slick-gallery-slideshow slick-testimonial-wrapper">
-
-
-
-
-
 								<div class="slider gallery-nav slick-testimonial-nav alt">
 									@foreach($clients as $client)
 									<div class="slick-item">
@@ -391,19 +379,19 @@
 
 									</div>
 									@endforeach
-									
 								</div>
 								<div class="clear mb-5"></div>
-
 							</div>
-
 						</div>
-
 					</div>
+
+
+					
+
 
 				</div>
 
-			</div>
+
 			</div>
 
 			<div class="clear"></div>

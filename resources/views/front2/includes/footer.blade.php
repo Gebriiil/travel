@@ -11,16 +11,16 @@
 							<div class="row">
 								<div class="footer-about col-sm-12 col-md-12">
 									<div class="footer-logo">
-										<a href="#home">KEEP IN TOUCH</a>
+										<a href="#home">{{ site_content($site_content,'Keep_in_touch') }}</a>
 									</div>
 
-									<p class="about-us-footer">There are many reasons to travel with Correct Egypt Tours! Come take advantage of our time-tested experience and unique tour offerings!<a href="#" class="font-italic bb-dotted">read more</a></p>
+									<p class="about-us-footer">{{ site_content($site_content,'Keep_in_touch_desc') }}<a href="#" class="font-italic bb-dotted">{{ site_content($site_content,'read_more') }}</a></p>
 									<p class="about-us-footer">
 										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										7 Sector 10, Zahraa Almaadi, Cairo, Egypt
+										{{ site_content($site_content,'address') }}
 									</p>
-									<p class="about-us-footer"> <i class="fa fa-phone-square"></i> 201014186485 </p>
-									<p class="about-us-footer"> <i class="fa fa-envelope"></i> seo@seoera.net </p>
+									<p class="about-us-footer"> <i class="fa fa-phone-square"></i> {{ site_content($site_content,'call') }} </p>
+									<p class="about-us-footer"> <i class="fa fa-envelope"></i> {{ site_content($site_content,'email') }} </p>
 
 
 								</div>
@@ -54,12 +54,12 @@
 						<div class="col-sm-12 col-sm-12 col-md-12">
 							<div class="copy_right_new">
 								<div class="social_footer text-center">
-									<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+									<a href="{{ json_value($settings,'facebook') }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+									<a href="{{ json_value($settings,'twitter') }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+									<a href="{{ json_value($settings,'instagram') }}"><i class="fa fa-google" aria-hidden="true"></i></a>
+									<a href="{{ json_value($settings,'pinterest') }}"><i class="fa fa-youtube" aria-hidden="true"></i></a>
 								</div>
-								<p class="copy-right font16 text-center"> Copyright © <a href="#"> Seoera </a> All rights reserved </p>
+								<p class="copy-right font16 text-center"> {{ site_content($site_content,'all_rights_reserved') }}</p>
 
 							</div>
 						</div>
@@ -91,6 +91,9 @@
  
 <!-- jQuery Cores -->
 <script type="text/javascript" src="{{furl()}}/js/jquery-1.11.3.min.js"></script>
+
+
+
 <script type="text/javascript" src="{{furl()}}/js/jquery-migrate-1.2.1.min.js"></script>
 
 <!-- Bootstrap Js -->
@@ -106,27 +109,33 @@
 <script type="text/javascript" src="{{furl()}}/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="{{furl()}}/js/customs-datepicker.js"></script>
 
-	<!--  detail page -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-	<script type="text/javascript" src="{{furl()}}/js/infobox.js"></script>
-	<script type="text/javascript" src="{{furl()}}/js/customs-detail-page.js"></script>
+
+
+
+
 	<script type="text/javascript" src="{{furl()}}/js/bootstrap-slider.js"></script>
-	@include('front.ajax.subscribe') 
-	@include('front.ajax.tours')
-	@include('front.ajax.booking')
 	<script>
-	  
-		$("#price_range").slider({});
+		$("#price_range_2").slider({});
+		$("#star_range").slider({});
 		// Without JQuery
 		$(document).ready(function () {
 			console.log($('#price_ranges').val());
 		});
-		
-	
-		
-	  </script>
+	</script>
+
+
+@if(isset($tour_links))
+	<!--  detail page -->
+	<script type="text/javascript" src="{{furl()}}/js/infobox.js"></script>
+	<script type="text/javascript" src="{{furl()}}/js/customs-detail-page.js"></script>
+	@endif
+	@include('front2.ajax.subscribe')
+@include('front2.ajax.tours')
+@include('front2.ajax.booking')
 
 </body>
+
+
 
 
 </html>
