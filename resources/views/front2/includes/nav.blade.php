@@ -21,7 +21,7 @@
 						<ul class="nav navbar-nav" id="responsive-menu">
 							<li><a href="{{murl('/')}}">{{ site_content($site_content,'home') }} </a></li>
 							@foreach ($categories->take(4) as $item)
-                			@if($item->sub->count()>0)
+                			
 							<li>
 								<a href="#">{{ $item->name }}</a>
 								<ul>
@@ -30,7 +30,7 @@
 									@endforeach
 								</ul>
 							</li>
-							@endif
+							
 							@endforeach
 							<li><a href="#">{{ site_content($site_content,'contact_us') }}</a></li>
 

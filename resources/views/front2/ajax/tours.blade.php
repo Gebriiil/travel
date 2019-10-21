@@ -165,7 +165,7 @@
         });
 
         $('#price-filter-tours-btn').on('click', function (e) {
-            var prices = $('#price_range').val();
+            var prices = $('#price_range_2').val();
             var cat_id = $('#cat-id-subpage').val();
             console.log(prices);
                 $.ajax({

@@ -16,6 +16,7 @@ class CategoryController extends ParentController
     public function index($categorySlug,$subCategorySlug)
     {
         // check if this category exist or not 
+        $lang = current_lang();
         $category = Category::where('slug',$categorySlug)->first(); 
         if(isset($category->sub)){
             if($category->sub->count()>0)
@@ -24,7 +25,11 @@ class CategoryController extends ParentController
                 $sub=$category->sub()->where('slug',$subCategorySlug)->first();
                $tours=$sub->tours;
                 $tags=Tag::all();
-                return view('front2.pages.subcategory_tours',compact('category','sub','tags','tours'));
+               $categories=Category::where('language_id',  $lang->id)
+                ->orderBy('id','name','img','img_alt')
+                ->take(8)
+                ->get();
+                return view('front2.pages.subcategory_tours',compact('category','sub','tags','tours','categories'));
             }
         }
         return redirect(url('/'));
